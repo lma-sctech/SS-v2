@@ -42,6 +42,9 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: "/SS"
           NEXT_PUBLIC_SITE_URL: "https://lma-sctech.github.io/SS"
 
+      - name: Check performance budget
+        run: npm run perf:budget
+
       - name: Disable Jekyll
         run: touch out/.nojekyll
 

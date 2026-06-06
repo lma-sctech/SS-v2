@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { services } from "@/data/services";
 import { trackEvent } from "@/lib/analytics";
-import { publicAsset } from "@/lib/assets";
+import { LazyBackgroundVideo } from "@/components/media/LazyBackgroundVideo";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -48,17 +48,7 @@ export function QuickLeadForm() {
         }
       }}
     >
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-      >
-        <source src={publicAsset("/vid/CSM1.mp4")} type="video/mp4" />
-      </video>
+      <LazyBackgroundVideo poster="/img/optimized/cta/legal-consultancy-1400.jpg" video="/vid/CSM1.mp4" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/48 to-black/18" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(214,184,124,0.28),transparent_24rem)]" />
       <div className="relative z-20 rounded-2xl border border-white/20 bg-black/24 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-5">

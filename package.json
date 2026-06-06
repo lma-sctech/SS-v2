@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "audit:assets": "node scripts/audit-assets.mjs",
+    "perf:budget": "node scripts/performance-budget.mjs"
   },
   "dependencies": {
     "next": "^16.2.7",

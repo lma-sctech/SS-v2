@@ -16,7 +16,7 @@ export function Footer() {
           <Link href="/" className="focus-ring relative inline-flex h-16 w-full max-w-[28rem] overflow-visible rounded-md" aria-label={`${siteConfig.name} home`}>
             <span className="absolute left-0 top-1/2 block h-40 w-full -translate-y-1/2 overflow-visible">
               <Image
-                src={publicAsset("/img/logo_sanaaservices_hd.png")}
+                src={publicAsset("/img/optimized/logo/sanaa-logo-640.png")}
                 alt=""
                 fill
                 sizes="448px"

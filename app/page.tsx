@@ -3,11 +3,12 @@ import { CardSurface } from "@/components/ui/CardSurface";
 import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 import { ContactStrip } from "@/components/marketing/ContactStrip";
 import { FAQAccordion } from "@/components/marketing/FAQAccordion";
+import { HeroVideo } from "@/components/media/HeroVideo";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { ServiceGrid } from "@/components/marketing/ServiceGrid";
 import { generalFaqs } from "@/data/faq";
-import { publicAsset } from "@/lib/assets";
 import { getDisplayReviews } from "@/lib/google-reviews";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -25,9 +26,9 @@ const audiences = [
   "Anyone facing paperwork they don't want to handle alone",
 ];
 const prepareLinks = [
-  { title: "What to bring to your appointment", body: "Each service has a short checklist of documents and IDs to prepare in advance. Bring the right things the first time - or send them to us ahead of your request.", image: "/img/apointment.jpg" },
-  { title: "Your documents stay private", body: "We handle personal and family documents with care. Your information is used only for your request and never shared without your consent.", image: "/img/document_private.jpg" },
-  { title: "Not sure where to start?", body: "Call us or send a WhatsApp message. We'll listen to your situation and point you toward the right service - no pressure, no commitment.", image: "/img/where_to_start2.jpg" },
+  { title: "What to bring to your appointment", body: "Each service has a short checklist of documents and IDs to prepare in advance. Bring the right things the first time - or send them to us ahead of your request.", image: "/img/optimized/cards/appointment-900.jpg" },
+  { title: "Your documents stay private", body: "We handle personal and family documents with care. Your information is used only for your request and never shared without your consent.", image: "/img/optimized/cards/document-private-900.jpg" },
+  { title: "Not sure where to start?", body: "Call us or send a WhatsApp message. We'll listen to your situation and point you toward the right service - no pressure, no commitment.", image: "/img/optimized/cards/where-to-start-900.jpg" },
 ];
 const heroTitleWords = "Important life matters deserve the right support.".split(" ");
 
@@ -37,20 +38,11 @@ export default async function HomePage() {
   return (
     <>
       <section className="relative -mt-[var(--site-header-height)] min-h-[86vh] overflow-hidden bg-navy text-white">
-        <div className="absolute inset-0">
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={publicAsset("/img/travel_usa03.jpg")}
-            aria-hidden="true"
-          >
-            <source src={publicAsset("/vid/hero-vid1.mp4")} type="video/mp4" />
-          </video>
-        </div>
+        <HeroVideo
+          poster="/img/optimized/hero/travel-hero-poster-1600.jpg"
+          mobilePoster="/img/optimized/hero/travel-hero-poster-900.jpg"
+          video="/vid/hero-vid1.mp4"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/30" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(214,184,124,0.34),transparent_34rem)]" />
         <div className="relative z-10 mx-auto flex min-h-[86vh] max-w-7xl flex-col items-center justify-end px-4 pb-10 pt-24 text-center sm:px-6 lg:px-8">
@@ -101,10 +93,9 @@ export default async function HomePage() {
                 key={item.title}
                 className="group relative flex min-h-96 overflow-hidden rounded-2xl border border-white/45 bg-navy p-6 text-white shadow-[0_22px_70px_rgba(15,23,42,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.32)]"
               >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${publicAsset(item.image)})` }}
-                  aria-hidden="true"
+                <ResponsiveImage
+                  src={item.image}
+                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/12" />
                 <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-44 w-44 rounded-full bg-champagne/35 blur-3xl transition duration-500 group-hover:bg-champagne/50" />

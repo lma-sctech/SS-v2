@@ -1,0 +1,7 @@
+{
+  "maxOutMB": 19,
+  "maxPublicImgMB": 3,
+  "maxPublicVidMB": 15,
+  "maxImageKB": 260,
+  "maxVideoKB": 8000
+}

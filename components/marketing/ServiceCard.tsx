@@ -23,6 +23,7 @@ export function ServiceCard({
   return (
     <Link
       href={`/services/${service.slug}`}
+      prefetch={false}
       className={`focus-ring group relative flex h-full min-h-80 overflow-hidden rounded-2xl border border-white/45 p-6 text-white shadow-[0_22px_70px_rgba(15,23,42,0.16)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.26)] ${
         featured
           ? "bg-navy text-white md:col-span-2"

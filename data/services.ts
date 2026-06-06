@@ -36,7 +36,7 @@ export const services: Service[] = [
     summary: "Certify affidavits, authorization letters, power of attorney and everyday documents quickly and professionally.",
     description:
       "Get reliable notary support for personal, family and business paperwork from our Astoria office.",
-    image: "/img/Notary1.jpg",
+    image: "/img/optimized/services/notary-1200.jpg",
     primaryCta: "Book Notary Help",
     problems: ["Affidavits and sworn statements", "Power of attorney forms", "Travel consent letters", "Business and personal forms"],
     documents: ["Government-issued ID", "Unsigned document", "Any witness information", "Appointment preference"],
@@ -58,7 +58,7 @@ export const services: Service[] = [
     summary: "Get clear guidance on what documents to prepare, what steps to take and who to contact for your legal or administrative matter.",
     description:
       "We help you understand paperwork, organize supporting documents and prepare for professional legal conversations.",
-    image: "/img/legal_consultancy2.jpg",
+    image: "/img/optimized/services/legal-consultancy-1200.jpg",
     primaryCta: "Request Consultation",
     problems: ["Document organization", "Appointment preparation", "Form review support", "Referral readiness"],
     documents: ["Relevant forms", "Letters or notices", "Timeline of events", "Questions you want answered"],
@@ -82,7 +82,7 @@ export const services: Service[] = [
     summary: "Explore auto, life and family insurance options with personalized support from a team that speaks your language.",
     description:
       "We help you prepare information and request coverage options that fit your household or business needs.",
-    image: "/img/family_insurance2.jpg",
+    image: "/img/optimized/services/insurance-1200.jpg",
     primaryCta: "Get a Quote",
     problems: ["Auto insurance", "Home and renters insurance", "Travel insurance", "Small business coverage"],
     documents: ["Current policy if available", "Driver or property details", "Desired start date", "Contact preference"],
@@ -104,7 +104,7 @@ export const services: Service[] = [
     summary: "Official translation of birth certificates, diplomas, immigration documents, passports and more — accurate and ready for submission anywhere in the US.",
     description:
       "Upload document details and request translation support with clear timelines and careful handling.",
-    image: "/img/american-passport.jpg",
+    image: "/img/optimized/services/translation-1000.jpg",
     primaryCta: "Translate a Document",
     problems: ["Birth certificates", "School records", "Administrative letters", "Travel and family documents"],
     documents: ["Readable document scan", "Source language", "Target language", "Deadline"],
@@ -127,7 +127,7 @@ export const services: Service[] = [
     summary: "Driving lessons, road test preparation and DMV guidance for new drivers and recent arrivals to the United States.",
     description:
       "Tell us your level and availability so we can guide you toward driving support that fits your schedule.",
-    image: "/img/drive_lesson.jpg",
+    image: "/img/optimized/services/driving-school-1200.jpg",
     primaryCta: "Start Driving Lessons",
     problems: ["Beginner lessons", "Road test preparation", "Schedule planning", "Practice refreshers"],
     documents: ["Learner permit status", "Experience level", "Preferred schedule", "Pickup area"],
@@ -149,7 +149,7 @@ export const services: Service[] = [
     summary: "Prepare the right forms, organize your documents and get step-by-step guidance through the US immigration process.",
     description:
       "We help families and individuals organize immigration-related paperwork and prepare next steps with care.",
-    image: "/img/welcom_usa.jpg",
+    image: "/img/optimized/services/visa-immigration-1200.jpg",
     primaryCta: "Get Immigration Help",
     problems: ["Document checklists", "Form preparation support", "Appointment readiness", "Case organization"],
     documents: ["Immigration notices", "ID or passport details", "Supporting documents", "Questions and deadlines"],
@@ -174,7 +174,7 @@ export const services: Service[] = [
     summary: "Plan your trip with confidence — flights to Morocco and beyond, family travel, and all the documents you need before you go.",
     description:
       "Share destination, dates and budget so we can help organize your travel request.",
-    image: "/img/Travel01.jpg",
+    image: "/img/optimized/services/travel-1200.jpg",
     primaryCta: "Plan My Trip",
     problems: ["Flight planning", "Travel documents", "Family trips", "Travel insurance coordination"],
     documents: ["Destination", "Travel dates", "Traveler count", "Budget range"],
