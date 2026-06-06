@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
+import { publicAsset } from "@/lib/assets";
 
 export function Footer() {
   const addressLine = `${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.region} ${siteConfig.address.postalCode}`;
@@ -15,7 +16,7 @@ export function Footer() {
           <Link href="/" className="focus-ring relative inline-flex h-16 w-full max-w-[28rem] overflow-visible rounded-md" aria-label={`${siteConfig.name} home`}>
             <span className="absolute left-0 top-1/2 block h-40 w-full -translate-y-1/2 overflow-visible">
               <Image
-                src="/img/logo_sanaaservices_hd.png"
+                src={publicAsset("/img/logo_sanaaservices_hd.png")}
                 alt=""
                 fill
                 sizes="448px"

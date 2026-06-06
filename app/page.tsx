@@ -7,6 +7,7 @@ import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { ServiceGrid } from "@/components/marketing/ServiceGrid";
 import { generalFaqs } from "@/data/faq";
+import { publicAsset } from "@/lib/assets";
 import { getDisplayReviews } from "@/lib/google-reviews";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -44,10 +45,10 @@ export default async function HomePage() {
             loop
             playsInline
             preload="metadata"
-            poster="/img/travel_usa03.jpg"
+            poster={publicAsset("/img/travel_usa03.jpg")}
             aria-hidden="true"
           >
-            <source src="/vid/hero-vid1.mp4" type="video/mp4" />
+            <source src={publicAsset("/vid/hero-vid1.mp4")} type="video/mp4" />
           </video>
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/30" />
@@ -102,7 +103,7 @@ export default async function HomePage() {
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${item.image})` }}
+                  style={{ backgroundImage: `url(${publicAsset(item.image)})` }}
                   aria-hidden="true"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/12" />

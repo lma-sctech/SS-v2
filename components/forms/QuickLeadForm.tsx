@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { services } from "@/data/services";
 import { trackEvent } from "@/lib/analytics";
+import { publicAsset } from "@/lib/assets";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -56,7 +57,7 @@ export function QuickLeadForm() {
         preload="metadata"
         aria-hidden="true"
       >
-        <source src="/vid/CSM1.mp4" type="video/mp4" />
+        <source src={publicAsset("/vid/CSM1.mp4")} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/48 to-black/18" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(214,184,124,0.28),transparent_24rem)]" />

@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CTAGroup } from "@/components/ui/CTAGroup";
+import { publicAsset } from "@/lib/assets";
 import { phoneLink, whatsappLink } from "@/lib/contact";
 
 export function ContactStrip({ service }: { service?: string }) {
@@ -7,7 +8,7 @@ export function ContactStrip({ service }: { service?: string }) {
     <section className="relative overflow-hidden rounded-2xl border border-white/45 bg-navy p-6 text-white shadow-[0_22px_70px_rgba(15,23,42,0.22)] sm:p-8">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/img/legal_consultancy2.jpg')" }}
+        style={{ backgroundImage: `url(${publicAsset("/img/legal_consultancy2.jpg")})` }}
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/82 to-navy/38" />

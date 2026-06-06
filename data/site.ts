@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "Sanaa Services | Notary, Insurance, Immigration & Travel in the US",
   description:
     "Trusted notary, translation, insurance, immigration and travel assistance for clients across the United States.",
-  url: "https://sanaaservices.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sanaaservices.com",
   phone: "+17186260236",
   phoneDisplay: "+1 718-626-0236",
   whatsapp: "+17186260236",

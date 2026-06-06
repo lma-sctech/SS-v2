@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { navItems, siteConfig } from "@/data/site";
 import { phoneLink, whatsappLink } from "@/lib/contact";
+import { publicAsset } from "@/lib/assets";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 
@@ -12,7 +13,7 @@ export function Header() {
         <Link href="/" className="focus-ring relative z-10 flex items-center gap-3 rounded-md" aria-label={`${siteConfig.name} home`}>
           <span className="relative block h-24 w-44 overflow-visible sm:h-32 sm:w-64 xl:h-40 xl:w-[28rem]">
             <Image
-              src="/img/logo_sanaaservices_hd.png"
+              src={publicAsset("/img/logo_sanaaservices_hd.png")}
               alt=""
               fill
               priority

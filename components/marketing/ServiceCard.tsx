@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Service } from "@/data/services";
+import { publicAsset } from "@/lib/assets";
 
 export function ServiceCard({
   service,
@@ -32,7 +33,7 @@ export function ServiceCard({
       <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-44 w-44 rounded-full bg-champagne/35 blur-3xl transition duration-500 group-hover:bg-champagne/50" />
       <div className="pointer-events-none absolute -bottom-20 left-8 z-10 h-40 w-56 rounded-full bg-navy/80 blur-3xl" />
       <Image
-        src={service.image}
+        src={publicAsset(service.image)}
         alt=""
         fill
         sizes={featured ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}

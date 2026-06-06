@@ -61,6 +61,14 @@ Start production build:
 npm run start
 ```
 
+Static export for GitHub Pages:
+
+```bash
+GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/SS NEXT_PUBLIC_SITE_URL=https://lma-sctech.github.io/SS npm run build
+```
+
+The GitHub Pages workflow lives in `.github/workflows/deploy.yml`. In GitHub, enable Pages from `Settings > Pages` and choose `GitHub Actions` as the source.
+
 ## Content
 
 Core editable content lives in:
