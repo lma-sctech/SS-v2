@@ -1,7 +1,7 @@
 import { CardSurface } from "@/components/ui/CardSurface";
 import type { Testimonial } from "@/data/testimonials";
 
-export function ReviewCard({ name, location, quote, service, rating = 5, sourceLabel, sourceUrl }: Testimonial) {
+export function ReviewCard({ name, quote, service, rating = 5, sourceLabel, sourceUrl }: Testimonial) {
   return (
     <CardSurface as="article" glow className="p-6">
       <div className="flex items-center justify-between gap-4">
@@ -12,17 +12,11 @@ export function ReviewCard({ name, location, quote, service, rating = 5, sourceL
       </div>
       <blockquote className="mt-4 text-base leading-7 text-navy">&ldquo;{quote}&rdquo;</blockquote>
       <p className="mt-5 font-bold text-navy">{name}</p>
-      <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate">
-        <span>{location}</span>
-        {sourceLabel && sourceUrl ? (
-          <>
-            <span aria-hidden="true">·</span>
-            <a className="focus-ring rounded-sm font-semibold text-navy hover:text-champagne" href={sourceUrl} target="_blank" rel="noreferrer">
-              {sourceLabel}
-            </a>
-          </>
-        ) : null}
-      </div>
+      {sourceLabel && sourceUrl ? (
+        <a className="focus-ring mt-1 inline-flex rounded-sm text-sm font-semibold text-navy hover:text-champagne" href={sourceUrl} target="_blank" rel="noreferrer">
+          {sourceLabel}
+        </a>
+      ) : null}
     </CardSurface>
   );
 }

@@ -12,8 +12,7 @@ function shouldAvoidVideo() {
 
   return (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    connection?.saveData === true ||
-    window.matchMedia("(max-width: 767px)").matches
+    connection?.saveData === true
   );
 }
 
