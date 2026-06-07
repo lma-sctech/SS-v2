@@ -11,7 +11,7 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Google reviewer",
+    name: "nicole Ben",
     quote:
       "The best travel Egency, very honest, trustworthy and professional, I got my first ticket from her Egency in 2005 and after all this years still the best ever, I recommend to everyone ..",
     service: "Travel",

@@ -23,11 +23,40 @@ export function HeroVideo({ video }: HeroVideoProps) {
   useEffect(() => {
     if (shouldAvoidVideo()) return;
 
-    const timeout = window.setTimeout(() => {
-      setVideoSrc(publicAsset(video));
-    }, 900);
+    let cancelled = false;
+    let timeout: number | undefined;
+    let idleId: number | undefined;
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
 
-    return () => window.clearTimeout(timeout);
+    function loadVideo() {
+      if (cancelled) return;
+      setVideoSrc(publicAsset(video));
+    }
+
+    function scheduleVideoLoad() {
+      if (idleWindow.requestIdleCallback) {
+        idleId = idleWindow.requestIdleCallback(loadVideo, { timeout: 2200 });
+        return;
+      }
+
+      timeout = window.setTimeout(loadVideo, 1600);
+    }
+
+    if (document.readyState === "complete") {
+      scheduleVideoLoad();
+    } else {
+      window.addEventListener("load", scheduleVideoLoad, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleVideoLoad);
+      if (timeout) window.clearTimeout(timeout);
+      if (idleId && idleWindow.cancelIdleCallback) idleWindow.cancelIdleCallback(idleId);
+    };
   }, [video]);
 
   return (

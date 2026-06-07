@@ -40,7 +40,7 @@ export function CardSurface({
       ) : (
         <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.22)]" />
       )}
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 h-full">{children}</div>
     </SurfaceTag>
   );
 }
