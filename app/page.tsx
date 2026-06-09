@@ -2,6 +2,8 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CardSurface } from "@/components/ui/CardSurface";
 import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 import { ContactStrip } from "@/components/marketing/ContactStrip";
+import { AnimatedTravelServiceCard } from "@/components/marketing/AnimatedTravelServiceCard";
+import { AirlineLogoCarousel } from "@/components/marketing/AirlineLogoCarousel";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
@@ -45,12 +47,12 @@ const travelServices = [
   {
     title: "Flights & Bookings",
     body: "Book flights to Morocco, New York, across the United States and international destinations with personalized support.",
-    image: "/img/optimized/services/travel-1200.jpg",
+    image: "/img/Flight.jpg",
   },
   {
     title: "Hotels & Stay Planning",
     body: "Get help finding practical accommodation options for families, fans and travelers.",
-    image: "/img/optimized/cards/appointment-900.jpg",
+    image: "/img/hotel and stay planning.jpg",
   },
   {
     title: "Family Travel",
@@ -60,17 +62,25 @@ const travelServices = [
   {
     title: "Travel Insurance",
     body: "Protect your trip with insurance guidance for families, individuals and international travelers.",
-    image: "/img/optimized/services/insurance-1200.jpg",
+    image: "/img/Travel Insurance.png",
   },
   {
     title: "World Cup 2026 Trips",
     body: "Planning to attend matches or travel during the tournament? We help you prepare flights, stays, routes and documents.",
     image: "/img/worldcup2.jpg",
+    images: [
+      "/img/worldcup- (1).jpg",
+      "/img/worldcup- (2).jpg",
+      "/img/worldcup- (3).jpg",
+      "/img/worldcup- (4).jpg",
+      "/img/worldcup- (5).jpg",
+      "/img/worldcup- (6).jpg",
+    ],
   },
   {
     title: "Multi-City USA Travel",
     body: "Need to move between New York, Miami, Dallas, Los Angeles, Atlanta or other cities? We help organize the journey.",
-    image: "/img/optimized/services/travel-1200.jpg",
+    image: "/img/multi-city-travel.gif",
   },
 ];
 
@@ -135,6 +145,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <AirlineLogoCarousel />
 
       <section className="bg-navy py-16 text-white" id="world-cup-2026">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
@@ -209,15 +221,8 @@ export default async function HomePage() {
             </ButtonLink>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {travelServices.map((service) => (
-              <CardSurface key={service.title} variant="media" interactive className="group min-h-[17rem] p-0">
-                <ResponsiveImage src={service.image} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/18" />
-                <div className="relative z-10 flex h-full min-h-[17rem] flex-col justify-end p-6">
-                  <p className="text-xl font-bold text-white">{service.title}</p>
-                  <p className="mt-3 text-sm leading-6 text-white/78">{service.body}</p>
-                </div>
-              </CardSurface>
+            {travelServices.map((service, index) => (
+              <AnimatedTravelServiceCard key={service.title} service={service} index={index} />
             ))}
           </div>
         </div>
@@ -301,7 +306,7 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
-        <CardSurface glow className="p-6 sm:p-8">
+        <CardSurface glow className="creators-partner-card p-6 sm:p-8">
           <SectionHeading
             eyebrow="Creators and partners"
             title="Creators and community partners visiting New York?"

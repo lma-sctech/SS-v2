@@ -71,7 +71,7 @@ textarea {
   color: white;
 }
 
-.home-video-page > section:not(.home-hero-section) {
+.home-video-page > section:not(.home-hero-section):not(.airline-carousel-section) {
   background: transparent !important;
   box-shadow: none;
   color: white;
@@ -142,6 +142,135 @@ textarea {
   animation-delay: 15s;
 }
 
+.travel-service-card {
+  opacity: 0;
+  transform: translateY(2.5rem) scale(0.96);
+  filter: blur(0.35rem);
+  transition:
+    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.travel-service-card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.travel-service-card-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: linear-gradient(120deg, transparent 10%, rgba(255, 255, 255, 0.22) 48%, transparent 70%);
+  opacity: 0;
+  transform: translateX(-120%);
+  transition:
+    opacity 240ms ease,
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.travel-service-card-visible:hover .travel-service-card-shine {
+  opacity: 1;
+  transform: translateX(120%);
+}
+
+.travel-service-card-slide {
+  opacity: 0;
+  transform: scale(1.025);
+  transition:
+    opacity 760ms ease,
+    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.travel-service-card-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.airline-carousel-section {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(7, 16, 36, 0.28);
+  backdrop-filter: blur(0.55rem);
+}
+
+.airline-carousel-section::before,
+.airline-carousel-section::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  z-index: 2;
+  width: min(8rem, 20vw);
+  pointer-events: none;
+}
+
+.airline-carousel-section::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(7, 16, 36, 0.86), transparent);
+}
+
+.airline-carousel-section::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(7, 16, 36, 0.86), transparent);
+}
+
+.airline-carousel-track {
+  display: flex;
+  width: max-content;
+  animation: airline-logo-marquee 34s linear infinite;
+  will-change: transform;
+}
+
+.airline-carousel-section:hover .airline-carousel-track {
+  animation-play-state: paused;
+}
+
+.airline-carousel-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.75rem, 6vw, 5rem);
+  padding-inline: clamp(1.375rem, 3vw, 2.75rem);
+}
+
+.airline-logo-item {
+  display: flex;
+  height: 3rem;
+  min-width: clamp(8rem, 14vw, 12rem);
+  align-items: center;
+  justify-content: center;
+}
+
+.airline-logo-item-featured {
+  min-width: clamp(8rem, 14vw, 12rem);
+}
+
+.airline-logo-image {
+  max-height: 2.15rem;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.88;
+  filter: brightness(0) invert(1) drop-shadow(0 0.75rem 1.2rem rgba(0, 0, 0, 0.38));
+}
+
+.airline-logo-image-featured {
+  opacity: 0.94;
+  transform: scale(1.58);
+  transform-origin: center;
+}
+
+.airline-logo-image-oversized {
+  transform: scale(2.05);
+}
+
+.creators-partner-card :is(h2, p) {
+  color: #071024 !important;
+  text-shadow: none !important;
+}
+
 @keyframes hero-word-reveal {
   to {
     opacity: 1;
@@ -169,6 +298,16 @@ textarea {
   }
 }
 
+@keyframes airline-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-word-reveal {
     opacity: 1 !important;
@@ -191,5 +330,31 @@ textarea {
 
   .worldcup-slide:first-child {
     opacity: 1;
+  }
+
+  .travel-service-card {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .travel-service-card-shine {
+    display: none;
+  }
+
+  .travel-service-card-slide {
+    opacity: 0;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .travel-service-card-slide-active {
+    opacity: 1;
+  }
+
+  .airline-carousel-track {
+    animation: none !important;
+    transform: none !important;
   }
 }

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import type { CSSProperties } from "react";
 import { publicAsset } from "@/lib/assets";
 
 type ResponsiveImageProps = {
@@ -8,6 +9,7 @@ type ResponsiveImageProps = {
   loading?: "eager" | "lazy";
   decoding?: "async" | "auto" | "sync";
   sizes?: string;
+  style?: CSSProperties;
 };
 
 export function ResponsiveImage({
@@ -17,6 +19,7 @@ export function ResponsiveImage({
   loading = "lazy",
   decoding = "async",
   sizes,
+  style,
 }: ResponsiveImageProps) {
   const sizeProps = sizes ? { sizes } : {};
 
@@ -27,6 +30,7 @@ export function ResponsiveImage({
       className={className}
       loading={loading}
       decoding={decoding}
+      style={style}
       {...sizeProps}
     />
   );
