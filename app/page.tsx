@@ -47,12 +47,12 @@ const travelServices = [
   {
     title: "Flights & Bookings",
     body: "Book flights to Morocco, New York, across the United States and international destinations with personalized support.",
-    image: "/img/Flight.jpg",
+    image: "/img/compressed/flight.jpg",
   },
   {
     title: "Hotels & Stay Planning",
     body: "Get help finding practical accommodation options for families, fans and travelers.",
-    image: "/img/hotel and stay planning.jpg",
+    image: "/img/compressed/hotel-and-stay-planning.jpg",
   },
   {
     title: "Family Travel",
@@ -62,25 +62,25 @@ const travelServices = [
   {
     title: "Travel Insurance",
     body: "Protect your trip with insurance guidance for families, individuals and international travelers.",
-    image: "/img/Travel Insurance.png",
+    image: "/img/compressed/travel-insurance.jpg",
   },
   {
     title: "World Cup 2026 Trips",
     body: "Planning to attend matches or travel during the tournament? We help you prepare flights, stays, routes and documents.",
-    image: "/img/worldcup2.jpg",
+    image: "/img/compressed/worldcup-main-02.jpg",
     images: [
-      "/img/worldcup- (1).jpg",
-      "/img/worldcup- (2).jpg",
-      "/img/worldcup- (3).jpg",
-      "/img/worldcup- (4).jpg",
-      "/img/worldcup- (5).jpg",
-      "/img/worldcup- (6).jpg",
+      "/img/compressed/worldcup-01.jpg",
+      "/img/compressed/worldcup-02.jpg",
+      "/img/compressed/worldcup-03.jpg",
+      "/img/compressed/worldcup-04.jpg",
+      "/img/compressed/worldcup-05.jpg",
+      "/img/compressed/worldcup-06.jpg",
     ],
   },
   {
     title: "Multi-City USA Travel",
     body: "Need to move between New York, Miami, Dallas, Los Angeles, Atlanta or other cities? We help organize the journey.",
-    image: "/img/multi-city-travel.gif",
+    image: "/img/compressed/multi-city-travel.jpg",
   },
 ];
 
@@ -176,7 +176,12 @@ export default async function HomePage() {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <div className="relative min-h-[24rem] overflow-hidden rounded-2xl border border-white/60 shadow-soft">
-          {["/img/worldcup1.jpg", "/img/worldcup2.jpg", "/img/worldcup3.jpg", "/img/worldcup4.jpg"].map((image, index) => (
+          {[
+            "/img/compressed/worldcup-main-01.jpg",
+            "/img/compressed/worldcup-main-02.jpg",
+            "/img/compressed/worldcup-main-03.jpg",
+            "/img/compressed/worldcup-main-04.jpg",
+          ].map((image, index) => (
             <ResponsiveImage
               key={image}
               src={image}
