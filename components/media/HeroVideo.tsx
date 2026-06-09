@@ -5,6 +5,8 @@ import { publicAsset } from "@/lib/assets";
 
 type HeroVideoProps = {
   video: string;
+  fixed?: boolean;
+  priority?: boolean;
 };
 
 function shouldAvoidVideo() {
@@ -16,7 +18,7 @@ function shouldAvoidVideo() {
   );
 }
 
-export function HeroVideo({ video }: HeroVideoProps) {
+export function HeroVideo({ video, fixed = false, priority = false }: HeroVideoProps) {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -34,6 +36,13 @@ export function HeroVideo({ video }: HeroVideoProps) {
     function loadVideo() {
       if (cancelled) return;
       setVideoSrc(publicAsset(video));
+    }
+
+    if (priority) {
+      loadVideo();
+      return () => {
+        cancelled = true;
+      };
     }
 
     function scheduleVideoLoad() {
@@ -57,10 +66,17 @@ export function HeroVideo({ video }: HeroVideoProps) {
       if (timeout) window.clearTimeout(timeout);
       if (idleId && idleWindow.cancelIdleCallback) idleWindow.cancelIdleCallback(idleId);
     };
-  }, [video]);
+  }, [priority, video]);
 
   return (
-    <div className="absolute inset-0">
+    <div
+      className={
+        fixed
+          ? "pointer-events-none fixed inset-0 z-0 h-screen w-screen overflow-hidden"
+          : "absolute inset-0"
+      }
+      aria-hidden="true"
+    >
       <div
         className="absolute inset-0 bg-[linear-gradient(135deg,rgba(5,18,47,1)_0%,rgba(11,31,72,1)_48%,rgba(8,15,31,1)_100%)]"
         aria-hidden="true"

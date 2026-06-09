@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Sanaa Services",
-  title: "Sanaa Services | Notary, Insurance, Immigration & Travel in the US",
+  title: "Sanaa Services | Travel Agency in Astoria for World Cup 2026, Morocco Trips & Family Travel",
   description:
-    "Trusted notary, translation, insurance, immigration and travel assistance for clients across the United States.",
+    "Sanaa Services is a multilingual travel agency in Astoria, Queens helping families, Moroccan and Arab communities with flights, hotels, travel insurance, World Cup 2026 travel support, documents and more.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sanaaservices.com",
   phone: "+17186260236",
   phoneDisplay: "+1 718-626-0236",
@@ -16,7 +16,7 @@ export const siteConfig = {
     country: "US",
   },
   hours: "Mon-Sat, 9:00 AM - 6:00 PM",
-  serviceArea: "Based in Astoria, NY · Serving clients across the United States",
+  serviceArea: "Based in Astoria, NY - Serving clients across the United States",
   googleReviewsUrl: "https://www.google.com/search?q=sanaaservices#lrd=0x89c25f402a398c2d:0x20cbdb6005b7476c,1,,,,",
   languages: ["English", "French", "Arabic"],
   socials: {
@@ -27,6 +27,10 @@ export const siteConfig = {
 };
 
 export const navItems = [
-  { label: "Services", href: "/services" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Home", href: "/" },
+  { label: "World Cup 2026", href: "/#world-cup-2026" },
+  { label: "Travel Services", href: "/#travel-services" },
+  { label: "Other Services", href: "/#other-services" },
+  { label: "Reviews", href: "/#reviews" },
+  { label: "Contact", href: "/#quick-request" },
 ];

@@ -2,180 +2,335 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CardSurface } from "@/components/ui/CardSurface";
 import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 import { ContactStrip } from "@/components/marketing/ContactStrip";
-import { FAQAccordion } from "@/components/marketing/FAQAccordion";
-import { HeroVideo } from "@/components/media/HeroVideo";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
-import { ServiceGrid } from "@/components/marketing/ServiceGrid";
-import { generalFaqs } from "@/data/faq";
 import { getDisplayReviews } from "@/lib/google-reviews";
 import { buildMetadata } from "@/lib/metadata";
+import { whatsappLink } from "@/lib/contact";
+import { siteConfig } from "@/data/site";
 
 export const metadata = buildMetadata(
-  "Sanaa Services | Notary, Insurance, Immigration & Travel in the US",
-  "Trusted notary, translation, insurance, immigration and travel assistance for clients across the United States.",
+  "Sanaa Services | Travel Agency in Astoria for World Cup 2026, Morocco Trips & Family Travel",
+  "Sanaa Services is a multilingual travel agency in Astoria, Queens helping families, Moroccan and Arab communities with flights, hotels, travel insurance, World Cup 2026 travel support, documents and more.",
 );
 
-const audiences = [
-  "Families settled across the US",
-  "Newcomers and recent arrivals",
-  "Students and young professionals",
-  "Travelers heading abroad",
-  "Workers needing official documents",
-  "Anyone facing paperwork they don't want to handle alone",
+const heroBadges = [
+  "Based in Astoria, Queens",
+  "English - French - Arabic",
+  "Flights - Hotels - Insurance",
+  "World Cup 2026 Travel Help",
 ];
-const prepareLinks = [
-  { title: "What to bring to your appointment", body: "Each service has a short checklist of documents and IDs to prepare in advance. Bring the right things the first time - or send them to us ahead of your request.", image: "/img/optimized/cards/appointment-900.jpg" },
-  { title: "Your documents stay private", body: "We handle personal and family documents with care. Your information is used only for your request and never shared without your consent.", image: "/img/optimized/cards/document-private-900.jpg" },
-  { title: "Not sure where to start?", body: "Call us or send a WhatsApp message. We'll listen to your situation and point you toward the right service - no pressure, no commitment.", image: "/img/optimized/cards/where-to-start-900.jpg" },
+
+const worldCupServices = [
+  "Flights to New York and other US host cities",
+  "Hotel and accommodation guidance",
+  "Travel insurance",
+  "Family travel planning",
+  "Multi-city trip support",
+  "Airport transfer guidance",
+  "Documents and travel checklist",
+  "Support in English, French and Arabic",
 ];
-const heroTitleWords = "Important life matters deserve the right support.".split(" ");
+
+const communityPoints = [
+  "Travel support for fans",
+  "Family and group trip guidance",
+  "Fan-friendly travel planning",
+  "Local agency in a community neighborhood",
+  "In-person or remote assistance",
+];
+
+const travelServices = [
+  {
+    title: "Flights & Bookings",
+    body: "Book flights to Morocco, New York, across the United States and international destinations with personalized support.",
+    image: "/img/optimized/services/travel-1200.jpg",
+  },
+  {
+    title: "Hotels & Stay Planning",
+    body: "Get help finding practical accommodation options for families, fans and travelers.",
+    image: "/img/optimized/cards/appointment-900.jpg",
+  },
+  {
+    title: "Family Travel",
+    body: "Traveling with parents, children or a group? We help you organize the trip clearly and comfortably.",
+    image: "/img/optimized/services/travel-1200.jpg",
+  },
+  {
+    title: "Travel Insurance",
+    body: "Protect your trip with insurance guidance for families, individuals and international travelers.",
+    image: "/img/optimized/services/insurance-1200.jpg",
+  },
+  {
+    title: "World Cup 2026 Trips",
+    body: "Planning to attend matches or travel during the tournament? We help you prepare flights, stays, routes and documents.",
+    image: "/img/worldcup2.jpg",
+  },
+  {
+    title: "Multi-City USA Travel",
+    body: "Need to move between New York, Miami, Dallas, Los Angeles, Atlanta or other cities? We help organize the journey.",
+    image: "/img/optimized/services/travel-1200.jpg",
+  },
+];
+
+const steps = [
+  "Tell us your destination, dates and number of travelers.",
+  "We review your options for flights, hotels, insurance and travel support.",
+  "You confirm the plan and we help you move forward with confidence.",
+];
+
+const otherServices = [
+  "Notary services for authorizations and family documents",
+  "Translation for travel and immigration documents",
+  "Visa and immigration document support",
+  "Insurance for auto, life, family and travel-related needs",
+  "Legal document and administrative guidance",
+  "Driving school and DMV guidance for newcomers",
+];
+
+const reasons = [
+  "Located in Astoria, Queens",
+  "Support in English, French and Arabic",
+  "Community-first approach",
+  "Travel, documents and insurance in one place",
+  "In-person and remote assistance",
+  "WhatsApp-first communication",
+  "Personalized guidance, not automated booking only",
+  "Longstanding local service",
+];
 
 export default async function HomePage() {
   const reviewsResult = await getDisplayReviews(4);
 
   return (
-    <>
-      <section className="relative -mt-[var(--site-header-height)] min-h-[86vh] overflow-hidden bg-navy text-white">
-        <HeroVideo video="/vid/hero-vid1.mp4" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(214,184,124,0.34),transparent_34rem)]" />
-        <div className="relative z-10 mx-auto flex min-h-[86vh] max-w-7xl flex-col items-center justify-end px-4 pb-10 pt-24 text-center sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            <h1 className="mx-auto mt-5 max-w-5xl font-sans text-6xl font-bold leading-none tracking-normal sm:text-7xl lg:text-8xl">
-              {heroTitleWords.map((word, index) => (
-                <span
-                  key={`${word}-${index}`}
-                  className="hero-word-reveal inline-block opacity-0"
-                  style={{ animationDelay: `${index * 220}ms` }}
-                >
-                  {word}
-                  {index < heroTitleWords.length - 1 ? "\u00A0" : ""}
-                </span>
-              ))}
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/78">
-              We help individuals and families across the United States handle what matters most.
+    <div className="home-video-page">
+      <section className="home-hero-section relative -mt-[var(--site-header-height)] min-h-[92vh] overflow-hidden text-white">
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
+        <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-28 sm:px-6 lg:px-8">
+          <div className="max-w-4xl">
+            <p className="inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-champagne backdrop-blur">
+              Travel agency in New York
             </p>
+            <h1 className="mt-6 max-w-4xl font-sans text-5xl font-bold leading-none tracking-normal sm:text-6xl lg:text-7xl">
+              Your World Cup 2026 Travel Partner
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82">
+              Flights, hotels, travel insurance and personalized travel support for Moroccan, Arab and international fans traveling to New York, across the United States, and beyond.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href={whatsappLink("World Cup 2026 travel planning")} variant="whatsapp" size="lg" target="_blank" rel="noreferrer" fullMobile>
+                Message us on WhatsApp
+              </ButtonLink>
+              <ButtonLink href="#travel-services" variant="secondary" size="lg" fullMobile>
+                Explore Travel Services
+              </ButtonLink>
+            </div>
           </div>
-          <div className="mt-12 grid w-full gap-3 border-t border-white/10 pt-5 text-sm font-semibold text-white/72 sm:grid-cols-3">
-            <p>2525 Steinway Street, Astoria, NY</p>
-            <p>English · French · Arabic</p>
-            <p>Mon-Sat, 9:00 AM - 6:00 PM</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8" id="services">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <SectionHeading eyebrow="Services" title="One place for the things that matter most." body="From notarizing a document to booking a flight, from insurance to immigration forms — Sanaa Services handles the paperwork so you can focus on what's next, wherever you are in the United States." />
-          <ButtonLink href="/services" variant="secondary" fullMobile>View All Services</ButtonLink>
-        </div>
-        <ServiceGrid featured />
-      </section>
-
-      <section className="bg-navy py-16 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Before you reach out"
-            title="Know what to bring. Know what to expect."
-            body="Many of our clients come to us unsure of where to start. These guides help you prepare before your appointment - so the process is clear, fast and stress-free, whether you visit us in person or reach out remotely."
-            tone="dark"
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {prepareLinks.map((item) => (
-              <article
-                key={item.title}
-                className="group relative flex min-h-96 overflow-hidden rounded-2xl border border-white/45 bg-navy p-6 text-white shadow-[0_22px_70px_rgba(15,23,42,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.32)]"
-              >
-                <ResponsiveImage
-                  src={item.image}
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/12" />
-                <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-44 w-44 rounded-full bg-champagne/35 blur-3xl transition duration-500 group-hover:bg-champagne/50" />
-                <div className="pointer-events-none absolute inset-0 z-10 rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.38),inset_0_-28px_70px_rgba(15,23,42,0.42)]" />
-                <div className="relative z-20 mt-auto flex min-h-[13.5rem] flex-col justify-start">
-                  <p className="font-sans text-3xl font-bold text-white">{item.title}</p>
-                  <p className="mt-4 text-sm leading-6 text-white/80">{item.body}</p>
-                </div>
-              </article>
+          <div className="mt-10 grid gap-3 border-t border-white/15 pt-5 text-sm font-semibold text-white/76 sm:grid-cols-2 lg:grid-cols-4">
+            {heroBadges.map((badge) => (
+              <p key={badge}>{badge}</p>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#eef1f5]/70 py-16">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_0.85fr] lg:px-8">
-          <CardSurface glow className="bg-ivory p-6 sm:p-8">
-            <SectionHeading eyebrow="How we help" title="Bring your situation. We'll help you find the next step." body="We listen, explain what's needed and walk you through each stage of your request — whether it's a simple document or a complex immigration process. Clear guidance, in your language, from a team with nearly 20 years of experience helping people navigate life in the United States." />
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {["Clear document checklists", "WhatsApp-first response", "Multilingual support", "One trusted team for many needs"].map((item) => (
-                <CardSurface key={item} interactive className="p-5 font-bold text-navy">{item}</CardSurface>
-              ))}
-            </div>
-          </CardSurface>
-          <CardSurface glow className="p-6 sm:p-8">
-            <SectionHeading eyebrow="Who we help" title="We understand what it takes to build a life in the United States." />
-            <div className="mt-8 grid grid-cols-2 gap-3">
-              {audiences.map((audience) => (
-                <CardSurface key={audience} variant="dark" interactive className="px-4 py-5 text-sm font-bold text-white">{audience}</CardSurface>
-              ))}
-            </div>
-          </CardSurface>
+      <section className="bg-navy py-16 text-white" id="world-cup-2026">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
+          <div>
+            <SectionHeading
+              eyebrow="World Cup 2026 Travel Support"
+              title="Traveling for World Cup 2026? We help you plan it right."
+              body="Sanaa Services helps fans and families organize their travel around World Cup 2026 with personalized support from Astoria, New York."
+              tone="dark"
+            />
+            <p className="mt-6 rounded-xl border border-white/15 bg-white/8 p-4 text-sm leading-6 text-white/72">
+              Sanaa Services provides travel planning and related services. Match tickets must be purchased through official authorized channels.
+            </p>
+            <ButtonLink href="#quick-request" className="mt-7" size="lg">
+              Request World Cup Travel Help
+            </ButtonLink>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {worldCupServices.map((item) => (
+              <CardSurface key={item} variant="dark" interactive className="p-5 text-sm font-bold leading-6 text-white">
+                {item}
+              </CardSurface>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8" id="quick-request">
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+        <div className="relative min-h-[24rem] overflow-hidden rounded-2xl border border-white/60 shadow-soft">
+          {["/img/worldcup1.jpg", "/img/worldcup2.jpg", "/img/worldcup3.jpg", "/img/worldcup4.jpg"].map((image, index) => (
+            <ResponsiveImage
+              key={image}
+              src={image}
+              className="worldcup-slide absolute inset-0 h-full w-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/86 via-navy/30 to-transparent" />
+          <div className="absolute bottom-0 p-6 text-white">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Astoria to the stadium</p>
+            <p className="mt-3 max-w-xl text-3xl font-bold">Travel support for fans, families and visitors coming through New York.</p>
+          </div>
+        </div>
         <div>
-          <SectionHeading eyebrow="How it works" title="Three steps from request to follow-up." />
+          <SectionHeading
+            eyebrow="World Cup fan travel"
+            title="World Cup fans in New York, your journey starts here."
+            body="From Astoria to the stadium, from flights to family trips, Sanaa Services helps World Cup fans prepare for one of the biggest football moments of 2026."
+            tone="dark"
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {communityPoints.map((point) => (
+              <CardSurface key={point} interactive className="p-4 text-sm font-bold text-navy">
+                {point}
+              </CardSurface>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#eef1f5]/80 py-16" id="travel-services">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Travel Agency Services"
+              title="Travel services built around your needs."
+              body="Get human help planning flights, hotels, family trips, travel insurance and multi-city routes from a local multilingual agency."
+              tone="dark"
+            />
+            <ButtonLink href="#quick-request" variant="dark" fullMobile>
+              Get a Travel Quote
+            </ButtonLink>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {travelServices.map((service) => (
+              <CardSurface key={service.title} variant="media" interactive className="group min-h-[17rem] p-0">
+                <ResponsiveImage src={service.image} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/18" />
+                <div className="relative z-10 flex h-full min-h-[17rem] flex-col justify-end p-6">
+                  <p className="text-xl font-bold text-white">{service.title}</p>
+                  <p className="mt-3 text-sm leading-6 text-white/78">{service.body}</p>
+                </div>
+              </CardSurface>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8" id="quick-request">
+        <div>
+          <SectionHeading eyebrow="How it works" title="Plan your trip in 3 simple steps." tone="dark" />
           <ol className="mt-8 space-y-4">
-            {[
-              "Tell us what you need — the service, the document type, or just your situation.",
-              "We confirm what to prepare and give you clear next steps.",
-              "You hear back by call, WhatsApp or email — usually the same day.",
-            ].map((step, index) => (
+            {steps.map((step, index) => (
               <CardSurface as="li" key={step} interactive className="p-5">
                 <div className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-champagne font-bold text-navy">{index + 1}</span>
-                <span className="text-sm font-semibold leading-6 text-navy">{step}</span>
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-champagne font-bold text-navy">{index + 1}</span>
+                  <span className="text-sm font-semibold leading-6 text-navy">{step}</span>
                 </div>
               </CardSurface>
             ))}
           </ol>
+          <ButtonLink href={whatsappLink("travel planning")} variant="whatsapp" className="mt-7" target="_blank" rel="noreferrer">
+            Start on WhatsApp
+          </ButtonLink>
         </div>
         <QuickLeadForm />
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="bg-navy py-16 text-white" id="other-services">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Google reviews"
-            title="Trusted by clients across the United States."
-            body={
-              reviewsResult.rating && reviewsResult.reviewCount
-                ? `Rated ${reviewsResult.rating.toFixed(1)}/5 on Google from ${reviewsResult.reviewCount} reviews.`
-                : "A few words from clients who trusted Sanaa Services with important documents, travel and everyday admin."
-            }
+            eyebrow="Additional services"
+            title="More services when you need them."
+            body="Beyond travel, Sanaa Services helps individuals and families with important life documents and administrative needs."
+            tone="dark"
           />
-          <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer" fullMobile>
-            Read more on Google
-          </ButtonLink>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {reviewsResult.reviews.map((review) => <ReviewCard key={`${review.name}-${review.quote}`} {...review} />)}
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {otherServices.map((service) => (
+              <CardSurface key={service} variant="dark" interactive className="p-5 text-sm font-bold leading-6 text-white">
+                {service}
+              </CardSurface>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <SectionHeading eyebrow="Common questions" title="A few answers before you reach out." />
-        <FAQAccordion faqs={generalFaqs.slice(0, 3)} />
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <SectionHeading
+          eyebrow="Why choose Sanaa Services"
+          title="Local, multilingual and trusted by the community."
+          body="You can visit us in Astoria or contact us remotely. We bring travel, insurance and document support together so your next step feels clearer."
+          tone="dark"
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {reasons.map((reason) => (
+            <CardSurface key={reason} interactive className="p-5 text-sm font-bold text-navy">
+              {reason}
+            </CardSurface>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-[#eef1f5]/80 py-16" id="reviews">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Google reviews"
+              title="Trusted by clients for travel, documents and support."
+              body={
+                reviewsResult.rating && reviewsResult.reviewCount
+                  ? `Rated ${reviewsResult.rating.toFixed(1)}/5 on Google from ${reviewsResult.reviewCount} reviews.`
+                  : "A few words from clients who trusted Sanaa Services with travel, translation, notary and immigration document support."
+              }
+              tone="dark"
+            />
+            <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer" fullMobile>
+              Read more on Google
+            </ButtonLink>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {reviewsResult.reviews.map((review) => <ReviewCard key={`${review.name}-${review.quote}`} {...review} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
+        <CardSurface glow className="p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Creators and partners"
+            title="Creators and community partners visiting New York?"
+            body="Sanaa Services welcomes creators, community pages and travel partners looking to collaborate around World Cup 2026, Moroccan fans, Arab community travel and New York experiences."
+          />
+          <ButtonLink href="#quick-request" className="mt-7" variant="dark">
+            Contact us for collaboration
+          </ButtonLink>
+        </CardSurface>
+        <CardSurface glow className="bg-ivory p-6 sm:p-8">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Visit or message us</p>
+          <p className="mt-4 text-2xl font-bold text-navy">{siteConfig.address.street}</p>
+          <p className="mt-2 text-sm leading-6 text-slate">
+            {siteConfig.address.city}, {siteConfig.address.region} {siteConfig.address.postalCode}
+          </p>
+          <p className="mt-4 text-sm font-semibold text-navy">{siteConfig.hours}</p>
+          <p className="mt-2 text-sm font-semibold text-navy">English - French - Arabic</p>
+        </CardSurface>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <ContactStrip />
+        <ContactStrip
+          service="travel planning"
+          eyebrow="Final travel call"
+          title="Ready to plan your trip?"
+          body="Whether you are traveling for World Cup 2026, visiting family, flying to Morocco or organizing a group trip, Sanaa Services is here to help."
+          image="/img/optimized/services/travel-1200.jpg"
+        />
       </section>
-    </>
+    </div>
   );
 }

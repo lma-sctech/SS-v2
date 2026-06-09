@@ -13,7 +13,7 @@ export const testimonials: Testimonial[] = [
   {
     name: "nicole Ben",
     quote:
-      "The best travel Egency, very honest, trustworthy and professional, I got my first ticket from her Egency in 2005 and after all this years still the best ever, I recommend to everyone ..",
+      "The best travel agency. Very honest, trustworthy and professional. I got my first ticket from her agency in 2005 and after all these years, still the best ever. I recommend to everyone.",
     service: "Travel",
     rating: 5,
   },

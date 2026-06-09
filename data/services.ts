@@ -53,13 +53,13 @@ export const services: Service[] = [
   },
   {
     slug: "legal-consultancy",
-    title: "Legal Consultancy",
+    title: "Legal Document Guidance",
     eyebrow: "Administrative guidance",
     summary: "Get clear guidance on what documents to prepare, what steps to take and who to contact for your legal or administrative matter.",
     description:
       "We help you understand paperwork, organize supporting documents and prepare for professional legal conversations.",
     image: "/img/optimized/services/legal-consultancy-1200.jpg",
-    primaryCta: "Request Consultation",
+    primaryCta: "Request Document Guidance",
     problems: ["Document organization", "Appointment preparation", "Form review support", "Referral readiness"],
     documents: ["Relevant forms", "Letters or notices", "Timeline of events", "Questions you want answered"],
     process: ["Share the topic", "Prepare your documents", "Receive structured next-step guidance"],
@@ -67,7 +67,7 @@ export const services: Service[] = [
     disclaimer:
       "Sanaa Services provides administrative guidance and document support. This service does not replace advice from a licensed attorney.",
     seo: {
-      title: "Legal Document Support | Sanaa Services",
+      title: "Legal Document Guidance | Sanaa Services",
       description: "Administrative legal document support and consultation preparation for clients across the United States.",
     },
     faqs: [
@@ -169,20 +169,20 @@ export const services: Service[] = [
   },
   {
     slug: "travel",
-    title: "Travel",
-    eyebrow: "Flights, bookings & travel help",
-    summary: "Plan your trip with confidence — flights to Morocco and beyond, family travel, and all the documents you need before you go.",
+    title: "Travel Agency",
+    eyebrow: "Flights, hotels & travel support",
+    summary: "Plan your trip with confidence: flights to Morocco and beyond, World Cup 2026 travel support, family travel, hotels and travel insurance.",
     description:
-      "Share destination, dates and budget so we can help organize your travel request.",
+      "Share your destination, dates, traveler count and budget so we can help organize flights, stays, insurance and related document needs.",
     image: "/img/optimized/services/travel-1200.jpg",
     primaryCta: "Plan My Trip",
-    problems: ["Flight planning", "Travel documents", "Family trips", "Travel insurance coordination"],
-    documents: ["Destination", "Travel dates", "Traveler count", "Budget range"],
-    process: ["Share trip details", "Confirm document needs", "Receive planning follow-up"],
-    formFields: ["Destination", "Travel dates", "Travelers", "Budget"],
+    problems: ["Flights and bookings", "World Cup 2026 travel planning", "Hotel guidance", "Family trips", "Travel insurance coordination"],
+    documents: ["Departure city", "Destination", "Travel dates", "Traveler count", "Budget range"],
+    process: ["Share trip details", "Review flight, hotel and insurance options", "Receive planning follow-up"],
+    formFields: ["Travel purpose", "Departure city", "Destination", "Travel dates", "Travelers", "Budget"],
     seo: {
-      title: "Travel Planning Help | Sanaa Services",
-      description: "Request travel planning support for flights, documents and family trips.",
+      title: "Travel Agency in Astoria NY | Sanaa Services",
+      description: "Request travel planning support for flights to Morocco, World Cup 2026 travel, hotels, insurance, documents and family trips.",
     },
     faqs: [
       { question: "Can you help with family trips?", answer: "Yes. Include the number of travelers and any document needs." },

@@ -34,7 +34,6 @@ export function CardSurface({
     >
       {glow ? (
         <>
-          <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-champagne/25 blur-3xl transition duration-500" />
           <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.34),inset_0_-24px_60px_rgba(15,23,42,0.12)]" />
         </>
       ) : (

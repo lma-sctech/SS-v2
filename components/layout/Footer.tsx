@@ -10,7 +10,7 @@ export function Footer() {
   const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
   return (
-    <footer className="border-t border-[#253150] bg-[#121B35] text-white shadow-[0_-18px_70px_rgba(18,27,53,0.28)]">
+    <footer className="border-t border-[#253150]/80 bg-[#121B35]/90 text-white shadow-[0_-18px_70px_rgba(18,27,53,0.28)] backdrop-blur-md">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_22rem] lg:px-8">
         <div>
           <Link href="/" className="focus-ring relative inline-flex h-16 w-full max-w-[28rem] overflow-visible rounded-md" aria-label={`${siteConfig.name} home`}>
@@ -26,7 +26,7 @@ export function Footer() {
             <span className="sr-only">{siteConfig.name}</span>
           </Link>
           <p className="mt-4 max-w-xl text-sm leading-6 text-white/78 drop-shadow-sm">
-            Practical support for documents, travel, insurance and immigration paperwork across the United States.
+            Travel planning, insurance and document support from Astoria for families, Moroccan and Arab communities, and World Cup 2026 visitors.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export function Footer() {
 
       <div className="border-t border-[#253150]">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-xs text-white/62 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© 2026 Sanaa Services. All rights reserved.</p>
+          <p>Copyright 2026 Sanaa Services. All rights reserved.</p>
           <div className="flex gap-4">
             <Link className="focus-ring rounded-sm hover:text-white" href="/contact">Contact</Link>
             <Link className="focus-ring rounded-sm hover:text-white" href="/privacy">Privacy</Link>
