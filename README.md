@@ -64,10 +64,24 @@ npm run start
 Static export for GitHub Pages:
 
 ```bash
-GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/SS NEXT_PUBLIC_SITE_URL=https://lma-sctech.github.io/SS npm run build
+npm run build:pages
 ```
 
-The GitHub Pages workflow lives in `.github/workflows/deploy.yml`. In GitHub, enable Pages from `Settings > Pages` and choose `GitHub Actions` as the source.
+The GitHub Pages workflow lives in `.github/workflows/deploy.yml`.
+
+For the `lma-sctech/SS-v2` repository, the published URL is:
+
+```txt
+https://lma-sctech.github.io/SS-v2
+```
+
+In GitHub, publish with:
+
+1. Open `Settings > Pages`.
+2. Set `Build and deployment > Source` to `GitHub Actions`.
+3. Push to `main`, or run the `Deploy to GitHub Pages` workflow manually.
+
+The workflow uses Git LFS for `.mp4` files and creates `out/.nojekyll` automatically.
 
 ## Content
 

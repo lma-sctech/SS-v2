@@ -1,5 +1,7 @@
 const isGithubPages = process.env.GITHUB_PAGES === "true";
-const githubPagesBasePath = "/SS";
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/SS-v2";
+const githubPagesBasePath =
+  configuredBasePath === "/" ? "" : configuredBasePath.startsWith("/") ? configuredBasePath : `/${configuredBasePath}`;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,8 +12,7 @@ const nextConfig = {
   ...(isGithubPages
     ? {
         output: "export",
-        basePath: githubPagesBasePath,
-        assetPrefix: `${githubPagesBasePath}/`,
+        ...(githubPagesBasePath ? { basePath: githubPagesBasePath, assetPrefix: `${githubPagesBasePath}/` } : {}),
         trailingSlash: true,
       }
     : {}),

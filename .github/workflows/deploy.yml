@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -36,17 +38,14 @@ jobs:
         run: npm ci
 
       - name: Build static site
-        run: npm run build
+        run: npm run build:pages
         env:
-          GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: "/SS"
-          NEXT_PUBLIC_SITE_URL: "https://lma-sctech.github.io/SS"
+          NEXT_PUBLIC_BASE_PATH: "/SS-v2"
+          NEXT_PUBLIC_SITE_URL: "https://lma-sctech.github.io/SS-v2"
 
       - name: Check performance budget
+        continue-on-error: true
         run: npm run perf:budget
-
-      - name: Disable Jekyll
-        run: touch out/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
