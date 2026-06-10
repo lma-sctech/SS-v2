@@ -28,8 +28,7 @@ export const siteConfig = {
 
 export const navItems = [
   { label: "World Cup 2026", href: "/#world-cup-2026" },
-  { label: "Travel Services", href: "/#travel-services" },
-  { label: "Other Services", href: "/#other-services" },
+  { label: "Services", href: "/#travel-services" },
   { label: "Reviews", href: "/#reviews" },
   { label: "Contact", href: "/#quick-request" },
 ];

@@ -34,7 +34,7 @@ export function Header() {
             About us
           </AboutStoryTrigger>
         </nav>
-        <div className="relative z-10 hidden items-center gap-2 md:flex">
+        <div className="relative z-10 hidden items-center gap-2 xl:flex">
           <ButtonLink href={phoneLink()} variant="contact" size="sm">Contact us</ButtonLink>
           <ButtonLink href={whatsappLink()} variant="whatsapp" size="sm" target="_blank" rel="noreferrer">WhatsApp</ButtonLink>
         </div>
