@@ -4,6 +4,7 @@ import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 import { ContactStrip } from "@/components/marketing/ContactStrip";
 import { AnimatedTravelServiceCard } from "@/components/marketing/AnimatedTravelServiceCard";
 import { AirlineLogoCarousel } from "@/components/marketing/AirlineLogoCarousel";
+import { AboutStoryTrigger } from "@/components/marketing/AboutStoryTrigger";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
@@ -33,14 +34,6 @@ const worldCupServices = [
   "Airport transfer guidance",
   "Documents and travel checklist",
   "Support in English, French and Arabic",
-];
-
-const communityPoints = [
-  "Travel support for fans",
-  "Family and group trip guidance",
-  "Fan-friendly travel planning",
-  "Local agency in a community neighborhood",
-  "In-person or remote assistance",
 ];
 
 const travelServices = [
@@ -118,18 +111,19 @@ export default async function HomePage() {
       <section className="home-hero-section relative -mt-[var(--site-header-height)] min-h-[92vh] overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
-        <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-28 sm:px-6 lg:px-8">
-          <div className="max-w-4xl">
-            <p className="inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-champagne backdrop-blur">
-              Travel agency in New York
+        <div className="relative z-10 flex min-h-[92vh] w-full flex-col items-center justify-end px-4 pb-10 pt-28 sm:px-6 lg:px-10">
+          <div className="w-full text-center">
+            <p className="mx-auto inline-flex max-w-full justify-center rounded-full border border-white/25 bg-white/12 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-champagne backdrop-blur">
+              Sanaa Services, Your Travel Partner to Support the Atlas Lions
             </p>
-            <h1 className="mt-6 max-w-4xl font-sans text-5xl font-bold leading-none tracking-normal sm:text-6xl lg:text-7xl">
-              Your World Cup 2026 Travel Partner
+            <h1 className="mx-auto mt-5 w-full max-w-none text-center font-sans text-3xl font-bold leading-[1.04] tracking-normal sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
+              <span className="block whitespace-nowrap">World Cup 2026 in the USA</span>
+              <span className="mt-2 block whitespace-nowrap sm:mt-3 lg:mt-4">Travel with Confidence, Support with Pride</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82">
+            <p className="mx-auto mt-7 max-w-4xl text-center text-lg leading-8 text-white/82">
               Flights, hotels, travel insurance and personalized travel support for Moroccan, Arab and international fans traveling to New York, across the United States, and beyond.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
               <ButtonLink href={whatsappLink("World Cup 2026 travel planning")} variant="whatsapp" size="lg" target="_blank" rel="noreferrer" fullMobile>
                 Message us on WhatsApp
               </ButtonLink>
@@ -138,7 +132,7 @@ export default async function HomePage() {
               </ButtonLink>
             </div>
           </div>
-          <div className="mt-10 grid gap-3 border-t border-white/15 pt-5 text-sm font-semibold text-white/76 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid w-full gap-3 border-t border-white/15 pt-5 text-center text-sm font-semibold text-white/76 sm:grid-cols-2 lg:grid-cols-4">
             {heroBadges.map((badge) => (
               <p key={badge}>{badge}</p>
             ))}
@@ -175,39 +169,27 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
-        <div className="relative min-h-[24rem] overflow-hidden rounded-2xl border border-white/60 shadow-soft">
-          {[
-            "/img/compressed/worldcup-main-01.jpg",
-            "/img/compressed/worldcup-main-02.jpg",
-            "/img/compressed/worldcup-main-03.jpg",
-            "/img/compressed/worldcup-main-04.jpg",
-          ].map((image, index) => (
-            <ResponsiveImage
-              key={image}
-              src={image}
-              className="worldcup-slide absolute inset-0 h-full w-full object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/86 via-navy/30 to-transparent" />
-          <div className="absolute bottom-0 p-6 text-white">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Astoria to the stadium</p>
-            <p className="mt-3 max-w-xl text-3xl font-bold">Travel support for fans, families and visitors coming through New York.</p>
-          </div>
-        </div>
+        <AboutStoryTrigger className="focus-ring group relative min-h-[32rem] overflow-hidden rounded-2xl border border-white/60 text-left shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.22)]">
+          <ResponsiveImage
+            src="/img/sanaa-bergha.png"
+            alt="Sanaa Bergha"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/24 via-transparent to-transparent" />
+          <div className="absolute inset-4 rounded-2xl border border-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)]" />
+        </AboutStoryTrigger>
         <div>
           <SectionHeading
-            eyebrow="World Cup fan travel"
-            title="World Cup fans in New York, your journey starts here."
-            body="From Astoria to the stadium, from flights to family trips, Sanaa Services helps World Cup fans prepare for one of the biggest football moments of 2026."
+            eyebrow="Discover our story"
+            title="A Story Built on Trust and Community"
+            body="For nearly two decades, Sanaa Services has helped families, travelers, and community members move forward with clarity and confidence. Discover the local Astoria agency built around guidance, service, and personal attention."
             tone="dark"
           />
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {communityPoints.map((point) => (
-              <CardSurface key={point} interactive className="p-4 text-sm font-bold text-navy">
-                {point}
-              </CardSurface>
-            ))}
+          <div className="mt-7 max-w-xl">
+            <AboutStoryTrigger className="focus-ring mt-5 inline-flex rounded-full bg-champagne px-5 py-3 text-sm font-bold text-navy shadow-sm transition hover:bg-white">
+              About us
+            </AboutStoryTrigger>
           </div>
         </div>
       </section>

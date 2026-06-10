@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import { publicAsset } from "@/lib/assets";
+import { AboutStoryTrigger } from "@/components/marketing/AboutStoryTrigger";
 
 export function Footer() {
   const addressLine = `${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.region} ${siteConfig.address.postalCode}`;
@@ -54,6 +55,9 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-xs text-white/62 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p>Copyright 2026 Sanaa Services. All rights reserved.</p>
           <div className="flex gap-4">
+            <AboutStoryTrigger className="focus-ring rounded-sm text-left hover:text-white">
+              About us
+            </AboutStoryTrigger>
             <Link className="focus-ring rounded-sm hover:text-white" href="/contact">Contact</Link>
             <Link className="focus-ring rounded-sm hover:text-white" href="/privacy">Privacy</Link>
             <a className="focus-ring rounded-sm hover:text-white" href={siteConfig.googleReviewsUrl} target="_blank" rel="noreferrer">Google Reviews</a>
