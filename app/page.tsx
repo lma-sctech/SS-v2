@@ -108,17 +108,17 @@ export default async function HomePage() {
 
   return (
     <div className="home-video-page">
-      <section className="home-hero-section relative -mt-[var(--site-header-height)] min-h-[92vh] overflow-hidden text-white">
+      <section className="home-hero-section relative -mt-[var(--site-header-height)] min-h-[100svh] overflow-hidden text-white sm:min-h-[92vh]">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
-        <div className="relative z-10 flex min-h-[92vh] w-full flex-col items-center justify-end px-4 pb-10 pt-28 sm:px-6 lg:px-10">
+        <div className="relative z-10 flex min-h-[100svh] w-full flex-col items-center justify-end px-4 pb-10 pt-36 sm:min-h-[92vh] sm:px-6 sm:pt-28 lg:px-10">
           <div className="w-full text-center">
             <p className="mx-auto inline-flex max-w-full justify-center rounded-full border border-white/25 bg-white/12 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-champagne backdrop-blur">
               Sanaa Services, Your Travel Partner to Support the Atlas Lions
             </p>
-            <h1 className="mx-auto mt-5 w-full max-w-none text-center font-sans text-3xl font-bold leading-[1.04] tracking-normal sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
-              <span className="block whitespace-nowrap">World Cup 2026 in the USA</span>
-              <span className="mt-2 block whitespace-nowrap sm:mt-3 lg:mt-4">Travel with Confidence, Support with Pride</span>
+            <h1 className="mx-auto mt-5 w-full max-w-none text-center font-sans text-[2.15rem] font-bold leading-[1.06] tracking-normal sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
+              <span className="block sm:whitespace-nowrap">World Cup 2026 in the USA</span>
+              <span className="mt-2 block sm:mt-3 sm:whitespace-nowrap lg:mt-4">Travel with Confidence, Support with Pride</span>
             </h1>
             <p className="mx-auto mt-7 max-w-4xl text-center text-lg leading-8 text-white/82">
               Flights, hotels, travel insurance and personalized travel support for Moroccan, Arab and international fans traveling to New York, across the United States, and beyond.
@@ -142,7 +142,7 @@ export default async function HomePage() {
 
       <AirlineLogoCarousel />
 
-      <section className="bg-navy py-16 text-white" id="world-cup-2026">
+      <section className="scroll-mt-28 bg-navy py-16 text-white sm:scroll-mt-24" id="world-cup-2026">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
           <div>
             <SectionHeading
@@ -194,7 +194,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#eef1f5]/80 py-16" id="travel-services">
+      <section className="scroll-mt-28 bg-[#eef1f5]/80 py-16 sm:scroll-mt-24" id="travel-services">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <SectionHeading
@@ -215,7 +215,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8" id="quick-request">
+      <section className="mx-auto grid max-w-7xl scroll-mt-28 gap-10 px-4 py-16 sm:scroll-mt-24 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8" id="quick-request">
         <div>
           <SectionHeading eyebrow="How it works" title="Plan your trip in 3 simple steps." tone="dark" />
           <ol className="mt-8 space-y-4">
@@ -235,7 +235,7 @@ export default async function HomePage() {
         <QuickLeadForm />
       </section>
 
-      <section className="bg-navy py-16 text-white" id="other-services">
+      <section className="scroll-mt-28 bg-navy py-16 text-white sm:scroll-mt-24" id="other-services">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Additional services"
@@ -269,7 +269,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#eef1f5]/80 py-16" id="reviews">
+      <section className="scroll-mt-28 bg-[#eef1f5]/80 py-16 sm:scroll-mt-24" id="reviews">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <SectionHeading
