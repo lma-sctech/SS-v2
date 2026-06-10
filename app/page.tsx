@@ -108,19 +108,19 @@ export default async function HomePage() {
 
   return (
     <div className="home-video-page">
-      <section className="home-hero-section relative -mt-[var(--site-header-height)] min-h-[100svh] overflow-hidden text-white sm:min-h-[92vh]">
+      <section className="home-hero-section relative min-h-[calc(100svh-var(--site-header-height))] overflow-hidden text-white sm:min-h-[calc(92vh-var(--site-header-height))]">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
-        <div className="relative z-10 flex min-h-[100svh] w-full flex-col items-center justify-end px-4 pb-10 pt-36 sm:min-h-[92vh] sm:px-6 sm:pt-28 lg:px-10">
-          <div className="w-full text-center">
-            <p className="mx-auto inline-flex max-w-full justify-center rounded-full border border-white/25 bg-white/12 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-champagne backdrop-blur">
+        <div className="relative z-10 flex min-h-[calc(100svh-var(--site-header-height))] w-full flex-col items-center justify-end px-5 pb-10 pt-12 sm:min-h-[calc(92vh-var(--site-header-height))] sm:px-6 sm:pt-16 lg:px-10">
+          <div className="w-full max-w-[92rem] text-center">
+            <p className="mx-auto inline-flex max-w-[21rem] justify-center rounded-full border border-white/25 bg-white/12 px-3 py-2 text-center text-[0.68rem] font-bold uppercase leading-5 tracking-[0.12em] text-champagne backdrop-blur sm:max-w-full sm:px-4 sm:text-xs sm:tracking-[0.18em]">
               Sanaa Services, Your Travel Partner to Support the Atlas Lions
             </p>
-            <h1 className="mx-auto mt-5 w-full max-w-none text-center font-sans text-[2.15rem] font-bold leading-[1.06] tracking-normal sm:mt-6 sm:text-5xl lg:text-6xl xl:text-7xl">
-              <span className="block sm:whitespace-nowrap">World Cup 2026 in the USA</span>
-              <span className="mt-2 block sm:mt-3 sm:whitespace-nowrap lg:mt-4">Travel with Confidence, Support with Pride</span>
+            <h1 className="mx-auto mt-5 w-full max-w-[23rem] text-center font-sans font-bold leading-[1.08] tracking-normal sm:mt-6 sm:max-w-none">
+              <span className="block text-[2rem] sm:whitespace-nowrap sm:text-[clamp(3rem,5vw,4.5rem)]">World Cup 2026 in the USA</span>
+              <span className="mt-2 block text-[2rem] sm:mt-3 sm:whitespace-nowrap sm:text-[clamp(2.3rem,3.55vw,4rem)] lg:mt-4">Travel with Confidence, Support with Pride</span>
             </h1>
-            <p className="mx-auto mt-7 max-w-4xl text-center text-lg leading-8 text-white/82">
+            <p className="mx-auto mt-7 max-w-[22rem] text-center text-base leading-7 text-white/82 sm:max-w-4xl sm:text-lg sm:leading-8">
               Flights, hotels, travel insurance and personalized travel support for Moroccan, Arab and international fans traveling to New York, across the United States, and beyond.
             </p>
             <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
