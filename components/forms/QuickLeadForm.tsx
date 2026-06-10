@@ -2,7 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { LazyBackgroundVideo } from "@/components/media/LazyBackgroundVideo";
+import { whatsappMessageLink } from "@/lib/contact";
+import { publicAsset } from "@/lib/assets";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -28,12 +29,11 @@ export function QuickLeadForm() {
       return;
     }
 
-    setStatus("loading");
-    window.setTimeout(() => {
-      setStatus("success");
-      form.reset();
-      trackEvent("form_submit", { form: "quick_lead" });
-    }, 700);
+    const message = buildWhatsAppMessage("Travel request", data);
+    window.open(whatsappMessageLink(message), "_blank", "noopener,noreferrer");
+    setStatus("success");
+    form.reset();
+    trackEvent("form_submit", { form: "quick_lead", destination: "whatsapp" });
   }
 
   return (
@@ -47,7 +47,18 @@ export function QuickLeadForm() {
         }
       }}
     >
-      <LazyBackgroundVideo poster="/img/optimized/cta/legal-consultancy-1400.jpg" video="/vid/CSM1.mp4" />
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src={publicAsset("/vid/CSM1.mp4")} type="video/mp4" />
+      </video>
+      <div className="site-background-scrim absolute inset-0" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/48 to-black/18" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(214,184,124,0.28),transparent_24rem)]" />
       <div className="relative z-20 rounded-2xl border border-white/20 bg-black/24 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-5">
@@ -78,9 +89,9 @@ export function QuickLeadForm() {
         </label>
       </div>
       <SubmitButton className="bg-champagne text-navy hover:bg-[#c9aa67]" disabled={status === "loading"}>
-        {status === "loading" ? "Sending..." : "Send Travel Request"}
+        Send Travel Request
       </SubmitButton>
-      {status === "success" ? <p className="mt-3 text-sm font-semibold text-white">Thank you. Your request has been received. A member of the Sanaa Services team will follow up with you shortly.</p> : null}
+      {status === "success" ? <p className="mt-3 text-sm font-semibold text-white">Your message is ready. WhatsApp will open so you can send it to our team.</p> : null}
       {status === "error" ? <p className="mt-3 text-sm font-semibold text-red-200">Please fill in all required fields before submitting.</p> : null}
       </div>
     </form>
@@ -115,6 +126,24 @@ function Field({
       />
     </label>
   );
+}
+
+function buildWhatsAppMessage(subject: string, data: FormData) {
+  const lines = [`Hello Sanaa Services, I would like help with ${subject}.`, ""];
+
+  data.forEach((value, key) => {
+    if (key === "company" || typeof value !== "string" || !value.trim()) return;
+    lines.push(`${formatLabel(key)}: ${value.trim()}`);
+  });
+
+  return lines.join("\n");
+}
+
+function formatLabel(key: string) {
+  return key
+    .replace(/([A-Z])/g, " $1")
+    .replace(/_/g, " ")
+    .replace(/^./, (letter) => letter.toUpperCase());
 }
 
 function Select({

@@ -5,13 +5,14 @@ import { ContactStrip } from "@/components/marketing/ContactStrip";
 import { AnimatedTravelServiceCard } from "@/components/marketing/AnimatedTravelServiceCard";
 import { AirlineLogoCarousel } from "@/components/marketing/AirlineLogoCarousel";
 import { AboutStoryTrigger } from "@/components/marketing/AboutStoryTrigger";
+import { PanelPromoCard } from "@/components/marketing/PanelPromoCard";
+import { HeroVideo } from "@/components/media/HeroVideo";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { getDisplayReviews } from "@/lib/google-reviews";
 import { buildMetadata } from "@/lib/metadata";
 import { whatsappLink } from "@/lib/contact";
-import { siteConfig } from "@/data/site";
 
 export const metadata = buildMetadata(
   "Sanaa Services | Travel Agency in Astoria for World Cup 2026, Morocco Trips & Family Travel",
@@ -119,6 +120,7 @@ export default async function HomePage() {
 
   return (
     <div className="home-video-page">
+      <HeroVideo video="/vid/hero-vid1.mp4" poster="/img/hero-poster.webp" fixed />
       <section className="home-hero-section relative min-h-[calc(100svh-var(--site-header-height))] overflow-hidden text-white sm:min-h-[calc(92vh-var(--site-header-height))]">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
@@ -134,11 +136,11 @@ export default async function HomePage() {
             <p className="mx-auto mt-7 max-w-[22rem] text-center text-base leading-7 text-white/82 sm:max-w-4xl sm:text-lg sm:leading-8">
               Flights, hotels, travel insurance and personalized travel support for Moroccan, Arab and international fans traveling to New York, across the United States, and beyond.
             </p>
-            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-              <ButtonLink href={whatsappLink("World Cup 2026 travel planning")} variant="whatsapp" size="lg" target="_blank" rel="noreferrer" fullMobile>
+            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+              <ButtonLink href={whatsappLink("World Cup 2026 travel planning")} variant="whatsapp" size="lg" target="_blank" rel="noreferrer">
                 Message us on WhatsApp
               </ButtonLink>
-              <ButtonLink href="#travel-services" variant="secondary" size="lg" fullMobile>
+              <ButtonLink href="#travel-services" variant="secondary" size="lg">
                 Explore Travel Services
               </ButtonLink>
             </div>
@@ -153,16 +155,21 @@ export default async function HomePage() {
 
       <AirlineLogoCarousel />
 
-      <section className="scroll-mt-28 bg-navy py-16 text-white sm:scroll-mt-24" id="world-cup-2026">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <div className="mx-auto">
-            <SectionHeading
-              eyebrow="World Cup 2026 Travel Support"
-              title="Traveling for World Cup 2026? We help you plan it right."
-              body="Sanaa Services helps fans and families organize their travel around World Cup 2026 with personalized support from Astoria, New York."
-              tone="dark"
-            />
-            <p className="mt-6 rounded-xl border border-white/15 bg-white/8 p-4 text-sm leading-6 text-white/72">
+      <section
+        className="world-cup-support-section relative z-20 isolate scroll-mt-28 overflow-hidden py-16 text-white sm:scroll-mt-24"
+        id="world-cup-2026"
+        aria-labelledby="world-cup-support-title"
+      >
+        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+          <div className="mx-auto rounded-2xl border border-white/16 bg-navy/28 px-5 py-9 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:px-8 sm:py-10">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">World Cup 2026 Travel Support</p>
+            <h2 id="world-cup-support-title" className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-normal text-white sm:text-4xl">
+              Traveling for World Cup 2026? We help you plan it right.
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-white/82">
+              Sanaa Services helps fans and families organize their travel around World Cup 2026 with personalized support from Astoria, New York.
+            </p>
+            <p className="mx-auto mt-6 max-w-3xl rounded-xl border border-white/14 bg-white/8 p-4 text-sm leading-6 text-white/72">
               Sanaa Services provides travel planning and related services. Match tickets must be purchased through official authorized channels.
             </p>
             <ButtonLink href="#quick-request" className="mt-7" size="lg">
@@ -175,10 +182,11 @@ export default async function HomePage() {
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <AboutStoryTrigger className="focus-ring group relative min-h-[32rem] overflow-hidden rounded-2xl border border-white/60 text-left shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.22)]">
           <ResponsiveImage
-            src="/img/sanaa-bergha.png"
+            src="/img/sanaa-bergha.webp"
             alt="Sanaa Bergha"
             className="absolute inset-0 h-full w-full object-cover object-center"
             loading="lazy"
+            sizes="(min-width: 1024px) 55vw, 100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/24 via-transparent to-transparent" />
           <div className="absolute inset-4 rounded-2xl border border-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)]" />
@@ -207,7 +215,7 @@ export default async function HomePage() {
               body="Get human help planning flights, hotels, family trips, travel insurance and multi-city routes from a local multilingual agency."
               tone="dark"
             />
-            <ButtonLink href="#quick-request" variant="dark" fullMobile>
+            <ButtonLink href="#quick-request" variant="dark">
               Get a Travel Quote
             </ButtonLink>
           </div>
@@ -252,7 +260,7 @@ export default async function HomePage() {
               }
               tone="dark"
             />
-            <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer" fullMobile>
+            <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer">
               Read more on Google
             </ButtonLink>
           </div>
@@ -262,48 +270,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
-        <div className="relative min-h-[26rem] overflow-hidden rounded-2xl text-white shadow-[0_22px_70px_rgba(15,23,42,0.22)]">
-          <ResponsiveImage
-            src="/img/influencers.jpg"
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/92 via-navy/72 to-navy/20" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/80 to-transparent" />
-          <div className="relative z-10 flex min-h-[26rem] items-center px-6 py-10 sm:px-8 lg:px-10">
-            <div className="max-w-2xl rounded-2xl border border-white/18 bg-navy/42 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-6">
-            <SectionHeading
-              eyebrow="Creators and partners"
-              title="Creators and community partners visiting New York?"
-              body="Sanaa Services welcomes creators, community pages and travel partners looking to collaborate around World Cup 2026, Moroccan fans, Arab community travel and New York experiences."
-              tone="dark"
-            />
-            <ButtonLink href="#quick-request" className="mt-7" variant="primary">
-              Contact us for collaboration
-            </ButtonLink>
-            </div>
-          </div>
-        </div>
-        <CardSurface glow className="bg-ivory p-6 sm:p-8">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Visit or message us</p>
-          <p className="mt-4 text-2xl font-bold text-navy">{siteConfig.address.street}</p>
-          <p className="mt-2 text-sm leading-6 text-slate">
-            {siteConfig.address.city}, {siteConfig.address.region} {siteConfig.address.postalCode}
-          </p>
-          <p className="mt-4 text-sm font-semibold text-navy">{siteConfig.hours}</p>
-          <p className="mt-2 text-sm font-semibold text-navy">English - French - Arabic</p>
-        </CardSurface>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+      <section className="mx-auto grid max-w-7xl items-stretch gap-6 px-4 py-16 sm:px-6 md:grid-cols-2 lg:gap-8 lg:px-8">
+        <PanelPromoCard
+          eyebrow="Creators and partners"
+          title="Creators and community partners visiting New York?"
+          body="Sanaa Services welcomes creators, community pages and travel partners looking to collaborate around World Cup 2026, Moroccan fans, Arab community travel and New York experiences."
+          image="/img/influencers.webp"
+        >
+          <ButtonLink href="#quick-request" variant="primary">
+            Contact us for collaboration
+          </ButtonLink>
+        </PanelPromoCard>
         <ContactStrip
           service="travel planning"
           eyebrow="Final travel call"
           title="Ready to plan your trip?"
           body="Whether you are traveling for World Cup 2026, visiting family, flying to Morocco or organizing a group trip, Sanaa Services is here to help."
           image="/img/optimized/services/travel-1200.jpg"
+          variant="panel"
         />
       </section>
     </div>

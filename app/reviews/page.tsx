@@ -26,7 +26,7 @@ export default async function ReviewsPage() {
               : "A few words from clients who trusted Sanaa Services with important documents, travel and everyday admin."
           }
         />
-        <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer" fullMobile>
+        <ButtonLink href={reviewsResult.sourceUrl} variant="secondary" target="_blank" rel="noreferrer">
           Read more on Google
         </ButtonLink>
       </div>

@@ -45,8 +45,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-5 rounded-2xl border border-champagne/40 bg-champagne/15 p-4 text-sm leading-6 text-navy">{service.disclaimer}</p>
             ) : null}
             <CTAGroup className="mt-8">
-              <ButtonLink href={phoneLink()} variant="contact" size="lg" fullMobile>Contact us</ButtonLink>
-              <ButtonLink href={whatsappLink(service.title)} variant="whatsapp" size="lg" fullMobile target="_blank" rel="noreferrer">Message on WhatsApp</ButtonLink>
+              <ButtonLink href={phoneLink()} variant="contact" size="lg">Contact us</ButtonLink>
+              <ButtonLink href={whatsappLink(service.title)} variant="whatsapp" size="lg" target="_blank" rel="noreferrer">Message on WhatsApp</ButtonLink>
             </CTAGroup>
           </div>
           <CardSurface glow className="p-6">

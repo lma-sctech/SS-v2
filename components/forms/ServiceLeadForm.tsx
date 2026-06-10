@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import type { Service } from "@/data/services";
 import { trackEvent } from "@/lib/analytics";
+import { whatsappMessageLink } from "@/lib/contact";
 import { UploadField } from "@/components/forms/UploadField";
 import { CardSurface } from "@/components/ui/CardSurface";
 import { SubmitButton } from "@/components/ui/SubmitButton";
@@ -30,12 +31,11 @@ export function ServiceLeadForm({ service }: { service: Service }) {
       return;
     }
 
-    setStatus("loading");
-    window.setTimeout(() => {
-      setStatus("success");
-      form.reset();
-      trackEvent("form_submit", { form: service.slug });
-    }, 700);
+    const message = buildWhatsAppMessage(service.title, data);
+    window.open(whatsappMessageLink(message), "_blank", "noopener,noreferrer");
+    setStatus("success");
+    form.reset();
+    trackEvent("form_submit", { form: service.slug, destination: "whatsapp" });
   }
 
   return (
@@ -74,12 +74,29 @@ export function ServiceLeadForm({ service }: { service: Service }) {
         </label>
       </div>
       <SubmitButton disabled={status === "loading"}>
-        {status === "loading" ? "Sending..." : "Send Request"}
+        Send Request
       </SubmitButton>
-      {status === "success" ? <p className="mt-3 text-sm font-semibold text-navy">Thank you. Your request has been received. A member of the Sanaa Services team will follow up with you shortly.</p> : null}
+      {status === "success" ? <p className="mt-3 text-sm font-semibold text-navy">Your message is ready. WhatsApp will open so you can send it to our team.</p> : null}
       {status === "error" ? <p className="mt-3 text-sm font-semibold text-red-700">Please fill in all required fields before submitting.</p> : null}
     </CardSurface>
   );
+}
+
+function buildWhatsAppMessage(serviceTitle: string, data: FormData) {
+  const lines = [`Hello Sanaa Services, I would like help with ${serviceTitle}.`, ""];
+
+  data.forEach((value, key) => {
+    if (key === "company" || typeof value !== "string" || !value.trim()) return;
+    lines.push(`${formatLabel(key)}: ${value.trim()}`);
+  });
+
+  return lines.join("\n");
+}
+
+function formatLabel(key: string) {
+  return key
+    .replace(/_/g, " ")
+    .replace(/^./, (letter) => letter.toUpperCase());
 }
 
 function Field({ label, name, type = "text", required = false }: { label: string; name: string; type?: string; required?: boolean }) {

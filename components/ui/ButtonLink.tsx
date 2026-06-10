@@ -6,6 +6,7 @@ type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children: ReactNode;
   variant?: "primary" | "secondary" | "dark" | "whatsapp" | "contact";
   size?: "sm" | "md" | "lg" | "mobileBar";
+  width?: "fit" | "full";
   fullMobile?: boolean;
 };
 
@@ -29,11 +30,13 @@ export function ButtonLink({
   children,
   variant = "primary",
   size = "md",
-  fullMobile = false,
+  width = "fit",
+  fullMobile: _fullMobile = false,
   className = "",
   ...props
 }: ButtonLinkProps) {
-  const classes = `focus-ring inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold leading-none shadow-sm transition ${sizes[size]} ${fullMobile ? "w-full sm:w-auto" : ""} ${variants[variant]} ${className}`;
+  const widthClass = width === "full" ? "w-full" : "w-fit";
+  const classes = `focus-ring inline-flex ${widthClass} max-w-full shrink-0 items-center justify-center gap-2 whitespace-normal rounded-full text-center font-semibold leading-tight shadow-sm transition ${sizes[size]} ${variants[variant]} ${className}`;
 
   if (href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) {
     return (

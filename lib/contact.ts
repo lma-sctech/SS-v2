@@ -7,6 +7,10 @@ export function whatsappLink(service?: string) {
   return `https://wa.me/${siteConfig.whatsapp.replace("+", "")}?text=${encodeURIComponent(message)}`;
 }
 
+export function whatsappMessageLink(message: string) {
+  return `https://wa.me/${siteConfig.whatsapp.replace("+", "")}?text=${encodeURIComponent(message)}`;
+}
+
 export function phoneLink() {
   return `tel:${siteConfig.phone}`;
 }

@@ -2,7 +2,7 @@ import { QuickLeadForm } from "@/components/forms/QuickLeadForm";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CardSurface } from "@/components/ui/CardSurface";
 import { CTAGroup } from "@/components/ui/CTAGroup";
-import { MapPlaceholder } from "@/components/marketing/MapPlaceholder";
+import { MapCard } from "@/components/marketing/MapCard";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { siteConfig } from "@/data/site";
 import { emailLink, phoneLink, whatsappLink } from "@/lib/contact";
@@ -29,10 +29,10 @@ export default function ContactPage() {
             <a className="focus-ring mt-2 block rounded-md text-xl font-bold text-navy" href={emailLink()}>{siteConfig.email}</a>
           </CardSurface>
           <CTAGroup>
-            <ButtonLink href={phoneLink()} variant="contact" fullMobile>Contact us</ButtonLink>
-            <ButtonLink href={whatsappLink()} variant="whatsapp" fullMobile target="_blank" rel="noreferrer">Message on WhatsApp</ButtonLink>
+            <ButtonLink href={phoneLink()} variant="contact">Contact us</ButtonLink>
+            <ButtonLink href={whatsappLink()} variant="whatsapp" target="_blank" rel="noreferrer">Message on WhatsApp</ButtonLink>
           </CTAGroup>
-          <MapPlaceholder />
+          <MapCard />
         </div>
         <QuickLeadForm />
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect, useId, useState } from "react";
+import { ReactNode, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const aboutSections = [
   {
@@ -92,17 +93,52 @@ export function AboutStoryTrigger({
   ariaLabel = "Open About us story",
 }: AboutStoryTriggerProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" className={className} aria-label={ariaLabel} onClick={() => setIsOpen(true)}>
+        {children}
+      </button>
+
+      <AboutStoryModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </>
+  );
+}
+
+export function AboutStoryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const titleId = useId();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const previousOverflow = document.body.style.overflow;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        onClose();
+        return;
+      }
+
+      if (event.key === "Tab" && modalRef.current) {
+        const focusable = getFocusableElements(modalRef.current);
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     }
 
@@ -111,63 +147,68 @@ export function AboutStoryTrigger({
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      previousFocusRef.current?.focus();
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
-  return (
-    <>
-      <button type="button" className={className} aria-label={ariaLabel} onClick={() => setIsOpen(true)}>
-        {children}
-      </button>
+  if (!isOpen || typeof document === "undefined") return null;
 
-      {isOpen ? (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-6 sm:px-6" role="dialog" aria-modal="true" aria-labelledby={titleId}>
-          <button
-            type="button"
-            className="absolute inset-0 bg-navy/78 backdrop-blur-sm"
-            aria-label="Close About us story"
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="relative max-h-[88vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/25 bg-navy/62 text-white shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,255,255,0.05)_38%,rgba(214,184,124,0.12))]" />
-            <div className="pointer-events-none absolute inset-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.24),inset_0_-40px_90px_rgba(0,0,0,0.2)]" />
-            <div className="sticky top-0 z-10 border-b border-white/15 bg-navy/72 px-5 py-4 backdrop-blur-2xl sm:px-7">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-champagne">About us</p>
-                  <h2 id={titleId} className="mt-1 font-sans text-2xl font-bold tracking-normal text-white sm:text-3xl">
-                    The story behind Sanaa Services
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  className="focus-ring flex size-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/12 text-xl font-bold leading-none text-white transition hover:bg-champagne hover:text-navy"
-                  aria-label="Close"
-                  onClick={() => setIsOpen(false)}
-                >
-                  x
-                </button>
-              </div>
+  return createPortal(
+    <div className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-6 sm:px-6" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <button
+        type="button"
+        className="absolute inset-0 bg-navy/78 backdrop-blur-sm"
+        aria-label="Close About us story"
+        onClick={onClose}
+      />
+      <div ref={modalRef} className="relative max-h-[88vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/25 bg-navy/62 text-white shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,255,255,0.05)_38%,rgba(214,184,124,0.12))]" />
+        <div className="pointer-events-none absolute inset-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.24),inset_0_-40px_90px_rgba(0,0,0,0.2)]" />
+        <div className="sticky top-0 z-10 border-b border-white/15 bg-navy/72 px-5 py-4 backdrop-blur-2xl sm:px-7">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-champagne">About us</p>
+              <h2 id={titleId} className="mt-1 font-sans text-2xl font-bold tracking-normal text-white sm:text-3xl">
+                The story behind Sanaa Services
+              </h2>
             </div>
-            <div className="relative z-10 max-h-[calc(88vh-5.5rem)] overflow-y-auto px-5 py-6 sm:px-7">
-              <div className="space-y-6">
-                {aboutSections.map((section) => (
-                  <section key={section.title} className="rounded-2xl border border-white/12 bg-white/8 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.16)] backdrop-blur-md">
-                    <h3 className="font-sans text-xl font-bold tracking-normal text-champagne">{section.title}</h3>
-                    <div className="mt-3 space-y-3 border-t border-white/10 pt-3">
-                      {section.paragraphs.map((paragraph) => (
-                        <p key={paragraph} className="text-sm font-medium leading-7 text-white/82 sm:text-base sm:leading-8">
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </div>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="focus-ring flex size-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/12 text-xl font-bold leading-none text-white transition hover:bg-champagne hover:text-navy"
+              aria-label="Close"
+              onClick={onClose}
+            >
+              x
+            </button>
           </div>
         </div>
-      ) : null}
-    </>
+        <div className="relative z-10 max-h-[calc(88vh-5.5rem)] overflow-y-auto px-5 py-6 sm:px-7">
+          <div className="space-y-6">
+            {aboutSections.map((section) => (
+              <section key={section.title} className="rounded-2xl border border-white/12 bg-white/8 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.16)] backdrop-blur-md">
+                <h3 className="font-sans text-xl font-bold tracking-normal text-champagne">{section.title}</h3>
+                <div className="mt-3 space-y-3 border-t border-white/10 pt-3">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph} className="text-sm font-medium leading-7 text-white/82 sm:text-base sm:leading-8">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body,
   );
+}
+
+function getFocusableElements(container: HTMLElement) {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((element) => element.offsetParent !== null);
 }

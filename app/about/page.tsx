@@ -1,5 +1,4 @@
 import { ContactStrip } from "@/components/marketing/ContactStrip";
-import { LanguageSwitchPlaceholder } from "@/components/marketing/LanguageSwitchPlaceholder";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { TrustBadgeRow } from "@/components/marketing/TrustBadgeRow";
 import { CardSurface } from "@/components/ui/CardSurface";
@@ -30,15 +29,15 @@ export default function AboutPage() {
           </div>
         </CardSurface>
         <CardSurface variant="dark" glow className="p-6">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Placeholder details</p>
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">Astoria office</p>
           <p className="mt-4 text-sm leading-7 text-white/80">
             {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.region} {siteConfig.address.postalCode}
           </p>
           <p className="mt-2 text-sm leading-7 text-white/80">{siteConfig.hours}</p>
           <p className="mt-2 text-sm leading-7 text-white/80">{siteConfig.serviceArea}</p>
-          <div className="mt-6">
-            <LanguageSwitchPlaceholder />
-          </div>
+          <p className="mt-6 rounded-2xl border border-white/15 bg-white/8 p-4 text-sm font-semibold leading-6 text-white/82">
+            Support is available in English, French and Arabic for travel, documents, insurance and community services.
+          </p>
         </CardSurface>
       </div>
       <div className="mt-12">

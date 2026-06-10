@@ -1,6 +1,6 @@
 "use client";
 
-import { KeyboardEvent, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { whatsappLink } from "@/lib/contact";
@@ -23,6 +23,9 @@ type TravelServiceCardProps = {
 
 export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -65,11 +68,30 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
     if (!isOpen) return;
 
     const previousOverflow = document.body.style.overflow;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
 
     function onKeyDown(event: globalThis.KeyboardEvent) {
       if (event.key === "Escape") {
         setIsOpen(false);
+        return;
+      }
+
+      if (event.key === "Tab" && modalRef.current) {
+        const focusable = getFocusableElements(modalRef.current);
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     }
 
@@ -78,15 +100,9 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      previousFocusRef.current?.focus();
     };
   }, [isOpen]);
-
-  function onCardKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      setIsOpen(true);
-    }
-  }
 
   return (
     <>
@@ -95,13 +111,11 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
         className={`travel-service-card ${isVisible ? "travel-service-card-visible" : ""}`}
         style={{ transitionDelay: `${index * 110}ms` }}
       >
-        <div
-          role="button"
-          tabIndex={0}
+        <button
+          type="button"
           aria-label={`Explore ${service.title}`}
-          className="focus-ring group relative min-h-[17rem] cursor-pointer overflow-hidden rounded-2xl border border-white/45 bg-navy text-left text-white shadow-[0_22px_70px_rgba(15,23,42,0.16)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.18)]"
+          className="focus-ring group relative block min-h-[17rem] w-full cursor-pointer overflow-hidden rounded-2xl border border-white/45 bg-navy text-left text-white shadow-[0_22px_70px_rgba(15,23,42,0.16)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.18)]"
           onClick={() => setIsOpen(true)}
-          onKeyDown={onCardKeyDown}
         >
           {service.images?.length ? (
             service.images.map((image, imageIndex) => (
@@ -111,10 +125,11 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
                 className={`travel-service-card-slide absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${
                   imageIndex === activeImageIndex ? "travel-service-card-slide-active" : ""
                 }`}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               />
             ))
           ) : (
-            <ResponsiveImage src={service.image} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <ResponsiveImage src={service.image} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/72 to-navy/18" />
           <div className="travel-service-card-shine" />
@@ -126,7 +141,7 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
               Explore service
             </span>
           </div>
-        </div>
+        </button>
       </div>
 
       {isOpen ? (
@@ -137,7 +152,7 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
             aria-label={`Close ${service.title} details`}
             onClick={() => setIsOpen(false)}
           />
-          <div className="service-modal-panel relative max-h-[90vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/25 bg-navy/72 text-white shadow-[0_30px_100px_rgba(0,0,0,0.48)] backdrop-blur-2xl">
+          <div ref={modalRef} className="service-modal-panel relative max-h-[90vh] w-full max-w-6xl overflow-hidden rounded-2xl border border-white/25 bg-navy/72 text-white shadow-[0_30px_100px_rgba(0,0,0,0.48)] backdrop-blur-2xl">
             <div className="grid max-h-[90vh] overflow-y-auto lg:grid-cols-[0.98fr_1.02fr]">
               <div className="relative aspect-[1.08/1] min-h-[18rem] overflow-hidden lg:sticky lg:top-1/2 lg:m-6 lg:self-start lg:-translate-y-1/2 lg:rounded-2xl">
                 {galleryImages.length > 1 ? (
@@ -150,10 +165,11 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
                         imageIndex === activeImageIndex ? "travel-service-card-slide-active" : ""
                       }`}
                       loading="lazy"
+                      sizes="(min-width: 1024px) 45vw, 100vw"
                     />
                   ))
                 ) : (
-                  <ResponsiveImage src={service.image} alt="" className="absolute inset-0 h-full w-full object-cover object-center service-modal-hero-image" loading="lazy" />
+                  <ResponsiveImage src={service.image} alt="" className="absolute inset-0 h-full w-full object-cover object-center service-modal-hero-image" loading="lazy" sizes="(min-width: 1024px) 45vw, 100vw" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/42 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
@@ -167,6 +183,7 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
 
               <div className="relative p-5 sm:p-7">
                 <button
+                  ref={closeButtonRef}
                   type="button"
                   className="focus-ring absolute right-5 top-5 z-10 flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/12 text-xl font-bold leading-none text-white transition hover:bg-champagne hover:text-navy"
                   aria-label="Close"
@@ -212,10 +229,10 @@ export function AnimatedTravelServiceCard({ service, index }: TravelServiceCardP
 
                 <div className="sticky bottom-0 -mx-5 mt-7 border-t border-white/12 bg-navy/82 px-5 py-4 backdrop-blur-xl sm:-mx-7 sm:px-7">
                   <div className="flex flex-col gap-3 sm:flex-row">
-                    <ButtonLink href={whatsappLink(service.ctaPrompt)} variant="whatsapp" fullMobile target="_blank" rel="noreferrer">
+                    <ButtonLink href={whatsappLink(service.ctaPrompt)} variant="whatsapp" target="_blank" rel="noreferrer">
                       Message us on WhatsApp
                     </ButtonLink>
-                    <ButtonLink href="#quick-request" variant="primary" fullMobile onClick={() => setIsOpen(false)}>
+                    <ButtonLink href="#quick-request" variant="primary" onClick={() => setIsOpen(false)}>
                       Start request
                     </ButtonLink>
                   </div>
@@ -242,4 +259,12 @@ function InfoPanel({ title, items }: { title: string; items: string[] }) {
       </ul>
     </div>
   );
+}
+
+function getFocusableElements(container: HTMLElement) {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((element) => element.offsetParent !== null);
 }

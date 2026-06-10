@@ -119,13 +119,20 @@ textarea {
   color: white;
 }
 
-.home-video-page > section:not(.home-hero-section):not(.airline-carousel-section) {
+.home-video-page > section:not(.home-hero-section):not(.airline-carousel-section):not(.world-cup-support-section) {
   background: transparent !important;
   box-shadow: none;
   color: white;
 }
 
-.home-video-page > section.bg-navy {
+.home-video-page > section.bg-navy:not(.world-cup-support-section) {
+  background: transparent !important;
+}
+
+.world-cup-support-section {
+  position: relative;
+  z-index: 20;
+  min-height: 21rem;
   background: transparent !important;
 }
 
