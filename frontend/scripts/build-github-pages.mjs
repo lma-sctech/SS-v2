@@ -26,5 +26,6 @@ child.on("exit", (code) => {
   const outDir = join(process.cwd(), "out");
   if (existsSync(outDir)) {
     writeFileSync(join(outDir, ".nojekyll"), "");
+    writeFileSync(join(outDir, ".htaccess"), "DirectoryIndex index.html index.php\nOptions -Indexes\n");
   }
 });

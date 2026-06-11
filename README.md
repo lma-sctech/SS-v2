@@ -137,11 +137,17 @@ The repository includes `.cpanel.yml` at the root. cPanel Git Deployment require
 
 The current deployment file:
 
-- builds `frontend/` as a static Next.js export;
-- uses `NEXT_PUBLIC_BASE_PATH=/`;
-- uses `NEXT_PUBLIC_SITE_URL=https://www.sanaaservices.com`;
-- uses `NEXT_PUBLIC_CONTACT_API_URL=https://api.sanaaservices.com/api/contact`;
-- copies `frontend/out/` into `$HOME/public_html/`.
+- follows cPanel's Git Deployment model by copying finished files only;
+- copies the checked-in static export from `frontend/out/` into `$HOME/public_html/`;
+- does not run `npm` on the cPanel server;
+- keeps the cPanel-managed repository clean during deployment.
+
+Before pushing a production deployment, rebuild the static export locally:
+
+```bash
+npm --prefix frontend run build:pages
+git add frontend/out
+```
 
 Recommended flow:
 

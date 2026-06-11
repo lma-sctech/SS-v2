@@ -1,13 +1,5 @@
 ---
 deployment:
   tasks:
-    - export REPOPATH=$PWD
-    - export FRONTENDPATH=$REPOPATH/frontend
     - export DEPLOYPATH=$HOME/public_html/
-    - export GITHUB_PAGES=true
-    - export NEXT_PUBLIC_BASE_PATH=/
-    - export NEXT_PUBLIC_SITE_URL=https://www.sanaaservices.com
-    - export NEXT_PUBLIC_CONTACT_API_URL=https://api.sanaaservices.com/api/contact
-    - cd $FRONTENDPATH && npm ci
-    - cd $FRONTENDPATH && npm run build:pages
-    - /bin/cp -R $FRONTENDPATH/out/. $DEPLOYPATH
+    - /bin/cp -R frontend/out/. $DEPLOYPATH
