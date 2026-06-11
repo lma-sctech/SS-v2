@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Validate static frontend
 
 on:
   push:
@@ -8,12 +8,10 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: static-frontend
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -32,9 +30,6 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
@@ -43,28 +38,11 @@ jobs:
         working-directory: frontend
         run: npm run build:pages
         env:
-          NEXT_PUBLIC_BASE_PATH: "/SS-v2"
-          NEXT_PUBLIC_SITE_URL: "https://lma-sctech.github.io/SS-v2"
-          NEXT_PUBLIC_CONTACT_API_URL: ${{ vars.NEXT_PUBLIC_CONTACT_API_URL }}
+          NEXT_PUBLIC_BASE_PATH: "/"
+          NEXT_PUBLIC_SITE_URL: "https://www.sanaaservices.com"
+          NEXT_PUBLIC_CONTACT_API_URL: "https://api.sanaaservices.com/api/contact"
 
       - name: Check performance budget
         continue-on-error: true
         working-directory: frontend
         run: npm run perf:budget
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./frontend/out
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

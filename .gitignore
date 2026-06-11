@@ -27,6 +27,7 @@ pnpm-debug.log*
 # Testing and coverage
 coverage/
 test-results/
+about-mobile-*.png
 
 # TypeScript
 *.tsbuildinfo

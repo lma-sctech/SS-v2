@@ -1,5 +1,5 @@
 const isGithubPages = process.env.GITHUB_PAGES === "true";
-const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/SS-v2";
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/";
 const githubPagesBasePath =
   configuredBasePath === "/" ? "" : configuredBasePath.startsWith("/") ? configuredBasePath : `/${configuredBasePath}`;
 

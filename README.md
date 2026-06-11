@@ -1,6 +1,6 @@
 # Sanaa Services
 
-Premium website and contact API for Sanaa Services.
+Premium frontend and contact API for Sanaa Services.
 
 ## Architecture
 
@@ -9,69 +9,67 @@ frontend/  Next.js static website
 backend/   Node.js + Express contact API
 ```
 
-The frontend can still be deployed to GitHub Pages. The backend must be deployed on a Node-capable host such as Render, Railway, Fly.io, a VPS, or any platform that can run an Express server.
+Production domain:
+
+```txt
+Frontend: https://www.sanaaservices.com
+Backend API: https://api.sanaaservices.com/api/contact
+Mailbox: contact@sanaaservices.com
+```
+
+The API URL is the public address of the Express backend route that receives form submissions. It is different from the email address. The email address is used by SMTP/Nodemailer to send and receive messages.
 
 ## Local Setup
 
-Install frontend dependencies:
+Install dependencies:
 
 ```bash
-cd frontend
-npm install
-```
-
-Install backend dependencies:
-
-```bash
-cd backend
-npm install
+npm --prefix frontend install
+npm --prefix backend install
 ```
 
 Create backend environment variables:
 
 ```bash
-cd backend
-copy .env.example .env
+copy backend\.env.example backend\.env
 ```
 
 Configure `backend/.env`:
 
 ```txt
 PORT=4000
-FRONTEND_URL=http://localhost:3000,http://127.0.0.1:3000
+FRONTEND_URL=http://localhost:3000,http://127.0.0.1:3000,https://www.sanaaservices.com,https://sanaaservices.com
+CONTACT_RATE_LIMIT_WINDOW_MS=900000
+CONTACT_RATE_LIMIT_MAX=10
 
-SMTP_HOST=smtp.example.com
+SMTP_HOST=your-smtp-host
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=your-smtp-user
+SMTP_USER=contact@sanaaservices.com
 SMTP_PASS=your-smtp-password
 
-MAIL_FROM="Sanaa Services <no-reply@sanaaservices.com>"
-MAIL_TO=hello@sanaaservices.com
+MAIL_FROM="Sanaa Services <contact@sanaaservices.com>"
+MAIL_TO=contact@sanaaservices.com
 ```
 
 Create frontend environment variables:
 
 ```bash
-cd frontend
-copy .env.example .env.local
+copy frontend\.env.example frontend\.env.local
 ```
 
-Configure `frontend/.env.local`:
+For local testing, configure `frontend/.env.local`:
 
 ```txt
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_PATH=/
 NEXT_PUBLIC_CONTACT_API_URL=http://localhost:4000/api/contact
 ```
 
-Run the backend:
+Run both apps:
 
 ```bash
 npm --prefix backend run dev
-```
-
-Run the frontend:
-
-```bash
 npm --prefix frontend run dev
 ```
 
@@ -133,56 +131,63 @@ Error response:
 }
 ```
 
-## Backend Deployment
+## cPanel Frontend Deployment
 
-GitHub Pages cannot run the backend. Deploy `backend/` separately.
+The repository includes `.cpanel.yml` at the root. cPanel Git Deployment requires this file in the top-level directory and runs the listed deployment commands.
 
-Generic deployment settings:
+The current deployment file:
 
-- Root directory: `backend`
-- Build command: `npm install`
-- Start command: `npm start`
-- Node version: `20`
+- builds `frontend/` as a static Next.js export;
+- uses `NEXT_PUBLIC_BASE_PATH=/`;
+- uses `NEXT_PUBLIC_SITE_URL=https://www.sanaaservices.com`;
+- uses `NEXT_PUBLIC_CONTACT_API_URL=https://api.sanaaservices.com/api/contact`;
+- copies `frontend/out/` into `$HOME/public_html/`.
 
-Required environment variables:
+Recommended flow:
+
+1. In cPanel, open Git Version Control.
+2. Clone or connect this GitHub repository.
+3. Use pull deployment from GitHub.
+4. Click Update from Remote.
+5. Click Deploy HEAD Commit.
+
+## cPanel Backend Deployment
+
+Deploy `backend/` as a Node.js application in cPanel, ideally on:
 
 ```txt
+https://api.sanaaservices.com
+```
+
+Recommended cPanel Node app settings:
+
+```txt
+Application root: backend
+Application startup file: server.js
+Node version: 20
+Start command: npm start
+```
+
+Required backend environment variables:
+
+```txt
+NODE_ENV=production
 PORT=4000
-FRONTEND_URL=https://lma-sctech.github.io
+FRONTEND_URL=https://www.sanaaservices.com,https://sanaaservices.com
 CONTACT_RATE_LIMIT_WINDOW_MS=900000
 CONTACT_RATE_LIMIT_MAX=10
+
 SMTP_HOST=your-smtp-host
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=your-smtp-user
+SMTP_USER=contact@sanaaservices.com
 SMTP_PASS=your-smtp-password
-MAIL_FROM="Sanaa Services <no-reply@sanaaservices.com>"
-MAIL_TO=hello@sanaaservices.com
+
+MAIL_FROM="Sanaa Services <contact@sanaaservices.com>"
+MAIL_TO=contact@sanaaservices.com
 ```
 
-If your frontend uses a custom domain, set `FRONTEND_URL` to that origin instead. You can use a comma-separated list when several origins must be allowed, for example local `localhost` and `127.0.0.1`.
-
-```txt
-FRONTEND_URL=https://sanaaservices.com
-```
-
-## Frontend Deployment
-
-The GitHub Pages workflow lives in `.github/workflows/deploy.yml` and builds from `frontend/`.
-
-Before production, set this GitHub repository variable:
-
-```txt
-NEXT_PUBLIC_CONTACT_API_URL=https://your-backend-domain.com/api/contact
-```
-
-Then push to `main`, or run the workflow manually.
-
-Static export:
-
-```bash
-npm --prefix frontend run build:pages
-```
+If cPanel gives the Node app a different public URL, update `NEXT_PUBLIC_CONTACT_API_URL` in `.cpanel.yml` before deploying the frontend.
 
 ## Useful Commands
 

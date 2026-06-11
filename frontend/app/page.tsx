@@ -179,8 +179,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
-        <AboutStoryTrigger className="focus-ring group relative min-h-[32rem] overflow-hidden rounded-2xl border border-white/60 text-left shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.22)]">
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8">
+        <AboutStoryTrigger className="focus-ring group relative min-h-[24rem] overflow-hidden rounded-2xl border border-white/60 text-left shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.22)] sm:min-h-[32rem]">
           <ResponsiveImage
             src="/img/sanaa-bergha.webp"
             alt="Sanaa Bergha"
@@ -191,7 +191,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-navy/24 via-transparent to-transparent" />
           <div className="absolute inset-4 rounded-2xl border border-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)]" />
         </AboutStoryTrigger>
-        <div className="lg:sticky lg:top-[calc(var(--site-header-height)+2rem)] lg:self-start">
+        <div className="relative z-10 rounded-2xl border border-white/18 bg-navy/42 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-6 lg:sticky lg:top-[calc(var(--site-header-height)+2rem)] lg:self-start lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-0">
           <SectionHeading
             eyebrow="Discover our story"
             title="A Story Built on Trust and Community"

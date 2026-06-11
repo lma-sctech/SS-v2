@@ -3,11 +3,11 @@ export const siteConfig = {
   title: "Sanaa Services | Travel Agency in Astoria for World Cup 2026, Morocco Trips & Family Travel",
   description:
     "Sanaa Services is a multilingual travel agency in Astoria, Queens helping families, Moroccan and Arab communities with flights, hotels, travel insurance, World Cup 2026 travel support, documents and more.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sanaaservices.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sanaaservices.com",
   phone: "+17186260236",
   phoneDisplay: "+1 718-626-0236",
   whatsapp: "+212661977164",
-  email: "hello@sanaaservices.com",
+  email: "contact@sanaaservices.com",
   address: {
     street: "2525 Steinway Street",
     city: "Astoria",

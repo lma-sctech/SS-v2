@@ -5,8 +5,8 @@ import { spawn } from "node:child_process";
 const env = {
   ...process.env,
   GITHUB_PAGES: "true",
-  NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH ?? "/SS-v2",
-  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL ?? "https://lma-sctech.github.io/SS-v2",
+  NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH ?? "/",
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sanaaservices.com",
 };
 
 const isWindows = process.platform === "win32";
