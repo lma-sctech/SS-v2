@@ -25,17 +25,18 @@ export function SiteLogo({ className = "", priority = false, size = "header" }: 
     return (
       <Link
         href="/"
-        className={`focus-ring group inline-flex w-[min(17rem,44vw)] overflow-visible rounded-md text-white transition hover:text-champagne ${className}`}
+        className={`focus-ring group relative inline-flex overflow-visible rounded-md text-white transition hover:text-champagne ${logoSize} ${className}`}
         aria-label={`${siteConfig.name} home`}
       >
-        <Image
-          src={publicAsset(logoSrc)}
-          alt=""
-          width={521}
-          height={289}
-          sizes="(min-width: 1280px) 544px, (min-width: 640px) 480px, 88vw"
-          className="h-auto w-full max-w-none drop-shadow-[0_12px_26px_rgba(0,0,0,0.28)]"
-        />
+        <span className={`relative block overflow-visible ${logoSize}`}>
+          <Image
+            src={publicAsset(logoSrc)}
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 480px, (min-width: 640px) 416px, 288px"
+            className="translate-y-2 object-contain object-center drop-shadow-[0_12px_26px_rgba(0,0,0,0.28)]"
+          />
+        </span>
         <span className="sr-only">{siteConfig.name}</span>
       </Link>
     );

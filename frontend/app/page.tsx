@@ -74,7 +74,7 @@ const travelServices = [
   {
     title: "World Cup 2026 Trips",
     body: "Planning to attend matches or travel during the tournament? We help you prepare flights, stays, routes and documents.",
-    image: "/img/compressed/worldcup-main-02.jpg",
+    image: "/img/compressed/worldcup-01.jpg",
     accentLabel: "World Cup 2026",
     ctaPrompt: "World Cup 2026 trip planning",
     highlights: ["Host cities", "Fan travel", "Documents checklist"],
@@ -120,7 +120,7 @@ export default async function HomePage() {
 
   return (
     <div className="home-video-page">
-      <HeroVideo video="/vid/hero-vid1.mp4" poster="/img/compressed/worldcup-main-02.jpg" fixed />
+      <HeroVideo video="/vid/hero-vid1.mp4" fixed priority />
       <section className="home-hero-section relative min-h-[calc(100svh-var(--site-header-height))] overflow-hidden text-white sm:min-h-[calc(92vh-var(--site-header-height))]">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />
