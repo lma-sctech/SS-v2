@@ -120,7 +120,7 @@ export default async function HomePage() {
 
   return (
     <div className="home-video-page">
-      <HeroVideo video="/vid/hero-vid1.mp4" poster="/img/hero-poster.webp" fixed />
+      <HeroVideo video="/vid/hero-vid1.mp4" poster="/img/compressed/worldcup-main-02.jpg" fixed />
       <section className="home-hero-section relative min-h-[calc(100svh-var(--site-header-height))] overflow-hidden text-white sm:min-h-[calc(92vh-var(--site-header-height))]">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/94 via-navy/76 to-navy/24" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy/82 to-transparent" />

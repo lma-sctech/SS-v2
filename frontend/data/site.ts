@@ -6,7 +6,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sanaaservices.com",
   phone: "+17186260236",
   phoneDisplay: "+1 718-626-0236",
-  whatsapp: "+17186260236",
+  whatsapp: "+212661977164",
   email: "hello@sanaaservices.com",
   address: {
     street: "2525 Steinway Street",
@@ -22,7 +22,7 @@ export const siteConfig = {
   socials: {
     instagram: "https://instagram.com/sanaaservices",
     facebook: "https://facebook.com/sanaaservices",
-    whatsapp: "https://wa.me/17186260236",
+    whatsapp: "https://wa.me/212661977164",
   },
 };
 

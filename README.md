@@ -1,170 +1,212 @@
 # Sanaa Services
 
-Premium, mobile-first website for Sanaa Services clients across the United States.
+Premium website and contact API for Sanaa Services.
 
-## Stack
+## Architecture
 
-- Next.js 16 App Router
-- TypeScript
-- Tailwind CSS
-- Vercel-ready App Router structure
+```txt
+frontend/  Next.js static website
+backend/   Node.js + Express contact API
+```
 
-## Placeholder Business Details
+The frontend can still be deployed to GitHub Pages. The backend must be deployed on a Node-capable host such as Render, Railway, Fly.io, a VPS, or any platform that can run an Express server.
 
-- Phone / WhatsApp: +1 718-626-0236
-- Email: hello@sanaaservices.com
-- Address: 2525 Steinway Street, Astoria, NY 11103
-- Hours: Mon-Sat, 9:00 AM - 6:00 PM
-- Languages: English, French, Arabic
-- Service area: Based in Astoria, NY · Serving clients across the United States
+## Local Setup
 
-## Routes
-
-- `/`
-- `/services`
-- `/services/notary`
-- `/services/legal-consultancy`
-- `/services/insurance`
-- `/services/translation`
-- `/services/driving-school`
-- `/services/visa-immigration`
-- `/services/travel`
-- `/about`
-- `/reviews`
-- `/faq`
-- `/contact`
-- `/privacy`
-
-## Development
-
-Install dependencies:
+Install frontend dependencies:
 
 ```bash
+cd frontend
 npm install
 ```
 
-Run locally:
+Install backend dependencies:
 
 ```bash
-npm run dev
+cd backend
+npm install
 ```
 
-Build:
+Create backend environment variables:
 
 ```bash
-npm run build
+cd backend
+copy .env.example .env
 ```
 
-Start production build:
-
-```bash
-npm run start
-```
-
-Static export for GitHub Pages:
-
-```bash
-npm run build:pages
-```
-
-The GitHub Pages workflow lives in `.github/workflows/deploy.yml`.
-
-For the `lma-sctech/SS-v2` repository, the published URL is:
+Configure `backend/.env`:
 
 ```txt
-https://lma-sctech.github.io/SS-v2
+PORT=4000
+FRONTEND_URL=http://localhost:3000,http://127.0.0.1:3000
+
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-smtp-user
+SMTP_PASS=your-smtp-password
+
+MAIL_FROM="Sanaa Services <no-reply@sanaaservices.com>"
+MAIL_TO=hello@sanaaservices.com
 ```
 
-In GitHub, publish with:
-
-1. Open `Settings > Pages`.
-2. Set `Build and deployment > Source` to `GitHub Actions`.
-3. Push to `main`, or run the `Deploy to GitHub Pages` workflow manually.
-
-The workflow uses Git LFS for `.mp4` files and creates `out/.nojekyll` automatically.
-
-## Content
-
-Core editable content lives in:
-
-- `data/site.ts`
-- `data/services.ts`
-- `data/faq.ts`
-- `data/testimonials.ts`
-
-Media assets used by the website live in:
-
-- `public/img`
-- `public/vid`
-
-## Forms
-
-The current form layer includes:
-
-- required field validation
-- simulated loading and success states
-- honeypot field
-- GTM-ready dataLayer event hooks
-- upload UI for Translation and Visa & Immigration
-
-No form data or files are sent anywhere yet.
-
-Future providers can be connected in:
-
-- `components/forms/QuickLeadForm.tsx`
-- `components/forms/ServiceLeadForm.tsx`
-- `components/forms/UploadField.tsx`
-
-## Analytics
-
-Prepared events:
-
-- `cta_click`
-- `call_click`
-- `whatsapp_click`
-- `form_start`
-- `form_submit`
-- `form_error`
-- `upload_start`
-- `upload_success`
-- `faq_open`
-- `service_card_click`
-
-Event helper:
-
-- `lib/analytics.ts`
-
-## Google Reviews
-
-The reviews section can use Google Places API when these environment variables are configured:
+Create frontend environment variables:
 
 ```bash
-GOOGLE_PLACES_API_KEY=
-GOOGLE_PLACES_TEXT_QUERY="Sanaa Services 2525 Steinway Street Astoria NY"
-GOOGLE_REVIEWS_URL="https://www.google.com/search?q=sanaaservices#lrd=0x89c25f402a398c2d:0x20cbdb6005b7476c,1,,,,"
+cd frontend
+copy .env.example .env.local
 ```
 
-Without an API key, the site falls back to local reviews in `data/testimonials.ts`.
+Configure `frontend/.env.local`:
 
-## SEO
+```txt
+NEXT_PUBLIC_CONTACT_API_URL=http://localhost:4000/api/contact
+```
 
-The app includes:
+Run the backend:
 
-- route metadata
-- canonical URLs
-- Open Graph/Twitter metadata
-- `robots.ts`
-- `sitemap.ts`
-- LocalBusiness JSON-LD
+```bash
+npm --prefix backend run dev
+```
 
-Update the production URL in `data/site.ts` before launch.
+Run the frontend:
 
-## Production Checklist
+```bash
+npm --prefix frontend run dev
+```
 
-- Add real brand photography or approved premium assets
-- Choose a real form provider
-- Choose a secure upload provider before accepting files
-- Configure GA4/GTM consent behavior
-- Add Sentry DSN if needed
-- Run Lighthouse audits on preview and production
-- Submit sitemap in Google Search Console
+Open:
+
+```txt
+http://localhost:3000
+```
+
+## Contact API
+
+Endpoint:
+
+```txt
+POST /api/contact
+```
+
+Expected JSON fields:
+
+```json
+{
+  "name": "Full name",
+  "phone": "Phone number",
+  "email": "Email address",
+  "service": "Travel request",
+  "contactMethod": "WhatsApp",
+  "travelPurpose": "World Cup 2026",
+  "departureCity": "New York",
+  "destination": "Miami",
+  "destinationCity": "Miami",
+  "date": "June 10-18, 2026",
+  "travelDates": "June 10-18, 2026",
+  "travelers": "2",
+  "needFlight": "Yes",
+  "needHotel": "Yes",
+  "needInsurance": "Not sure",
+  "needDocuments": "No",
+  "budget": "$1,500-$2,500",
+  "message": "Additional details"
+}
+```
+
+Success response:
+
+```json
+{
+  "success": true,
+  "requestId": "SS-20260611-A7K4",
+  "message": "Contact request sent successfully."
+}
+```
+
+Error response:
+
+```json
+{
+  "success": false,
+  "error": "Missing required field: phone."
+}
+```
+
+## Backend Deployment
+
+GitHub Pages cannot run the backend. Deploy `backend/` separately.
+
+Generic deployment settings:
+
+- Root directory: `backend`
+- Build command: `npm install`
+- Start command: `npm start`
+- Node version: `20`
+
+Required environment variables:
+
+```txt
+PORT=4000
+FRONTEND_URL=https://lma-sctech.github.io
+CONTACT_RATE_LIMIT_WINDOW_MS=900000
+CONTACT_RATE_LIMIT_MAX=10
+SMTP_HOST=your-smtp-host
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-smtp-user
+SMTP_PASS=your-smtp-password
+MAIL_FROM="Sanaa Services <no-reply@sanaaservices.com>"
+MAIL_TO=hello@sanaaservices.com
+```
+
+If your frontend uses a custom domain, set `FRONTEND_URL` to that origin instead. You can use a comma-separated list when several origins must be allowed, for example local `localhost` and `127.0.0.1`.
+
+```txt
+FRONTEND_URL=https://sanaaservices.com
+```
+
+## Frontend Deployment
+
+The GitHub Pages workflow lives in `.github/workflows/deploy.yml` and builds from `frontend/`.
+
+Before production, set this GitHub repository variable:
+
+```txt
+NEXT_PUBLIC_CONTACT_API_URL=https://your-backend-domain.com/api/contact
+```
+
+Then push to `main`, or run the workflow manually.
+
+Static export:
+
+```bash
+npm --prefix frontend run build:pages
+```
+
+## Useful Commands
+
+```bash
+npm run lint
+npm run build
+npm run build:pages
+npm run audit:assets
+npm run perf:budget
+```
+
+Backend:
+
+```bash
+npm --prefix backend run dev
+npm --prefix backend start
+```
+
+## Notes
+
+- SMTP credentials are only used by the backend.
+- Never expose SMTP credentials in `frontend/.env.local`.
+- The backend creates a request ID and includes it in the email and API response.
+- The frontend shows a confirmation modal after the email is sent. WhatsApp is optional and uses the same request ID.
+- CORS is restricted by `FRONTEND_URL`.
+- `/api/contact` is rate-limited to 10 requests per IP by default.
+- Current video assets are intentionally kept because they are part of the site identity; the performance budget may still flag the hero video size.

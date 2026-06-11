@@ -1,0 +1,30 @@
+{
+  "name": "sanaa-services",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:pages": "node scripts/build-github-pages.mjs",
+    "start": "next start",
+    "lint": "eslint .",
+    "audit:assets": "node scripts/audit-assets.mjs",
+    "perf:budget": "node scripts/performance-budget.mjs"
+  },
+  "dependencies": {
+    "next": "^16.2.7",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.2.7",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.0"
+  }
+}

@@ -6,6 +6,7 @@
   color-scheme: light;
   background: #071024;
   --site-header-height: 4.25rem;
+  --font-inter: "Inter", "Segoe UI", Arial, sans-serif;
 }
 
 * {
