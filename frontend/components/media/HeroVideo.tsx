@@ -1,15 +1,18 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useEffect, useState } from "react";
 import { publicAsset } from "@/lib/assets";
 
 type HeroVideoProps = {
   video?: string;
+  poster?: string;
   fixed?: boolean;
   priority?: boolean;
 };
 
-export function HeroVideo({ video, fixed = false, priority = false }: HeroVideoProps) {
+export function HeroVideo({ video, poster, fixed = false, priority = false }: HeroVideoProps) {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -27,6 +30,7 @@ export function HeroVideo({ video, fixed = false, priority = false }: HeroVideoP
 
     function loadVideo() {
       if (cancelled) return;
+      setIsReady(false);
       setVideoSrc(publicAsset(videoPath));
     }
 
@@ -73,6 +77,16 @@ export function HeroVideo({ video, fixed = false, priority = false }: HeroVideoP
         className="absolute inset-0 bg-[linear-gradient(135deg,rgba(5,18,47,1)_0%,rgba(11,31,72,1)_48%,rgba(8,15,31,1)_100%)]"
         aria-hidden="true"
       />
+      {poster ? (
+        <img
+          src={publicAsset(poster)}
+          alt=""
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isReady ? "opacity-0" : "opacity-100"}`}
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+        />
+      ) : null}
       {videoSrc ? (
         <video
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isReady ? "opacity-100" : "opacity-0"}`}
