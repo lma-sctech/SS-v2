@@ -32,6 +32,12 @@ about-mobile-*.png
 # TypeScript
 *.tsbuildinfo
 
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
 # OS and editor files
 .DS_Store
 Thumbs.db

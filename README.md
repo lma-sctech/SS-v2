@@ -5,8 +5,9 @@ Premium frontend and contact API for Sanaa Services.
 ## Architecture
 
 ```txt
-frontend/  Next.js static website
-backend/   Node.js + Express contact API
+frontend/       Next.js static website
+backend/        Node.js + Express contact API used during earlier local tests
+backend-python/ Python + Flask contact API for Heberjahiz cPanel production
 ```
 
 Production domain:
@@ -17,7 +18,7 @@ Backend API: https://api.sanaaservices.com/api/contact
 Mailbox: contact@sanaaservices.com
 ```
 
-The API URL is the public address of the Express backend route that receives form submissions. It is different from the email address. The email address is used by SMTP/Nodemailer to send and receive messages.
+The API URL is the public address of the backend route that receives form submissions. It is different from the email address. The email address is used by SMTP to send and receive messages.
 
 ## Local Setup
 
@@ -26,6 +27,7 @@ Install dependencies:
 ```bash
 npm --prefix frontend install
 npm --prefix backend install
+python -m pip install -r backend-python/requirements.txt
 ```
 
 Create backend environment variables:
@@ -157,43 +159,59 @@ Recommended flow:
 4. Click Update from Remote.
 5. Click Deploy HEAD Commit.
 
-## cPanel Backend Deployment
+## Heberjahiz cPanel Backend Deployment
 
-Deploy `backend/` as a Node.js application in cPanel, ideally on:
+Heberjahiz currently exposes `Setup Python App` on this hosting plan, so production uses the Python backend in `backend-python/`.
+
+Deploy `backend-python/` as a Python application in cPanel, ideally on:
 
 ```txt
 https://api.sanaaservices.com
 ```
 
-Recommended cPanel Node app settings:
+Recommended cPanel Python app settings:
 
 ```txt
-Application root: backend
-Application startup file: server.js
-Node version: 20
-Start command: npm start
+Application root: repositories/sanaa-services/backend-python
+Application URL: api.sanaaservices.com
+Application startup file: passenger_wsgi.py
+Application entry point: application
+Python version: 3.10 or newer
 ```
 
 Required backend environment variables:
 
 ```txt
-NODE_ENV=production
-PORT=4000
 FRONTEND_URL=https://www.sanaaservices.com,https://sanaaservices.com
 CONTACT_RATE_LIMIT_WINDOW_MS=900000
 CONTACT_RATE_LIMIT_MAX=10
 
-SMTP_HOST=your-smtp-host
+SMTP_HOST=mail.sanaaservices.com
 SMTP_PORT=587
 SMTP_SECURE=false
+SMTP_STARTTLS=true
 SMTP_USER=contact@sanaaservices.com
 SMTP_PASS=your-smtp-password
 
-MAIL_FROM="Sanaa Services <contact@sanaaservices.com>"
+MAIL_FROM=Sanaa Services <contact@sanaaservices.com>
 MAIL_TO=contact@sanaaservices.com
 ```
 
-If cPanel gives the Node app a different public URL, update `NEXT_PUBLIC_CONTACT_API_URL` in `.cpanel.yml` before deploying the frontend.
+After creating the Python app, run the cPanel dependency installer from `backend-python/requirements.txt`, then restart the app.
+
+Health check:
+
+```txt
+https://api.sanaaservices.com/health
+```
+
+Expected response:
+
+```json
+{"success":true,"status":"ok"}
+```
+
+If cPanel gives the Python app a different public URL, update `NEXT_PUBLIC_CONTACT_API_URL` before rebuilding and deploying the frontend static export.
 
 ## Useful Commands
 
@@ -210,6 +228,7 @@ Backend:
 ```bash
 npm --prefix backend run dev
 npm --prefix backend start
+python -m py_compile backend-python/app.py backend-python/passenger_wsgi.py
 ```
 
 ## Notes
