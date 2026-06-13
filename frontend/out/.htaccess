@@ -1,2 +1,19 @@
 DirectoryIndex index.html index.php
 Options -Indexes
+
+ErrorDocument 503 /index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{REQUEST_URI} !^/index\.html$
+  RewriteCond %{REQUEST_URI} !^/sanaa-logo-640\.png$
+  RewriteCond %{REQUEST_URI} !^/maintenance-hero\.jpg$
+  RewriteCond %{REQUEST_URI} !^/favicon.ico$
+  RewriteRule ^ - [R=503,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Cache-Control "no-store, no-cache, must-revalidate"
+  Header always set Retry-After "3600"
+</IfModule>

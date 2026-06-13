@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:pages": "node scripts/build-github-pages.mjs",
+    "maintenance:stage": "node scripts/stage-maintenance.mjs",
     "start": "next start",
     "lint": "eslint .",
     "audit:assets": "node scripts/audit-assets.mjs",

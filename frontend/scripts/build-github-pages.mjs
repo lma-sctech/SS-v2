@@ -1,6 +1,7 @@
 import { existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
+import { stageMaintenance } from "./stage-maintenance.mjs";
 
 const env = {
   ...process.env,
@@ -27,5 +28,9 @@ child.on("exit", (code) => {
   if (existsSync(outDir)) {
     writeFileSync(join(outDir, ".nojekyll"), "");
     writeFileSync(join(outDir, ".htaccess"), "DirectoryIndex index.html index.php\nOptions -Indexes\n");
+
+    if (existsSync(join(process.cwd(), "..", "maintenance", "enabled"))) {
+      stageMaintenance();
+    }
   }
 });
