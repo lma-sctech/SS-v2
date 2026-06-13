@@ -37,6 +37,9 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+backend-python/.htaccess
+backend-python/tmp/
+backend-python/stderr.log
 
 # OS and editor files
 .DS_Store

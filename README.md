@@ -141,6 +141,7 @@ The current deployment file:
 
 - follows cPanel's Git Deployment model by copying finished files only;
 - copies the checked-in static export from `frontend/out/` into `$HOME/public_html/`;
+- copies the Python API source into `$HOME/sanaa-api/`, outside the Git repository;
 - does not run `npm` on the cPanel server;
 - keeps the cPanel-managed repository clean during deployment.
 
@@ -161,7 +162,15 @@ Recommended flow:
 
 ## Heberjahiz cPanel Backend Deployment
 
-Heberjahiz currently exposes `Setup Python App` on this hosting plan, so production uses the Python backend in `backend-python/`.
+Heberjahiz currently exposes `Setup Python App` on this hosting plan, so production uses the Python backend maintained in `backend-python/`.
+
+The cPanel deployment copies that source into:
+
+```txt
+$HOME/sanaa-api
+```
+
+The running Python application must use this copied directory, not the Git repository. Passenger and cPanel generate runtime files, and placing the application inside `repositories/sanaa-services` makes the Git working tree dirty and blocks future deployments.
 
 Deploy `backend-python/` as a Python application in cPanel, ideally on:
 
@@ -172,7 +181,7 @@ https://api.sanaaservices.com
 Recommended cPanel Python app settings:
 
 ```txt
-Application root: repositories/sanaa-services/backend-python
+Application root: sanaa-api
 Application URL: api.sanaaservices.com
 Application startup file: passenger_wsgi.py
 Application entry point: application
@@ -197,7 +206,15 @@ MAIL_FROM=Sanaa Services <contact@sanaaservices.com>
 MAIL_TO=contact@sanaaservices.com
 ```
 
-After creating the Python app, run the cPanel dependency installer from `backend-python/requirements.txt`, then restart the app.
+After creating the Python app, add `requirements.txt` under Configuration files, run Pip Install, add the environment variables, then restart the app.
+
+Migration from the old application root:
+
+1. Delete only the existing Python application from `Setup Python App`; do not delete the Git repository.
+2. In Git Version Control, update the repository and deploy the latest commit.
+3. Confirm that `$HOME/sanaa-api/` contains `app.py`, `passenger_wsgi.py`, and `requirements.txt`.
+4. Recreate the Python application with `Application root: sanaa-api`.
+5. Install `requirements.txt`, restore the environment variables, and restart the application.
 
 Health check:
 

@@ -2,6 +2,11 @@
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
+    - export APIDEPLOYPATH=$HOME/sanaa-api/
+    - /bin/mkdir -p $APIDEPLOYPATH
+    - /bin/cp backend-python/app.py $APIDEPLOYPATH/app.py
+    - /bin/cp backend-python/passenger_wsgi.py $APIDEPLOYPATH/passenger_wsgi.py
+    - /bin/cp backend-python/requirements.txt $APIDEPLOYPATH/requirements.txt
     - /bin/cp -R frontend/out/. $DEPLOYPATH
     - /bin/cp maintenance/sanaa-logo-640.png $DEPLOYPATH/sanaa-logo-640.png
     - /bin/cp maintenance/maintenance-hero.jpg $DEPLOYPATH/maintenance-hero.jpg
