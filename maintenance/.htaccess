@@ -7,6 +7,8 @@ Options -Indexes
   RewriteCond %{REQUEST_URI} !^/_next/
   RewriteCond %{REQUEST_URI} !^/img/
   RewriteCond %{REQUEST_URI} !^/vid/
+  RewriteCond %{REQUEST_URI} !^/sanaa-logo-640\.png$
+  RewriteCond %{REQUEST_URI} !^/maintenance-hero\.jpg$
   RewriteCond %{REQUEST_URI} !^/favicon.ico$
   RewriteCond %{REQUEST_URI} !^/robots.txt$
   RewriteCond %{REQUEST_URI} !^/sitemap.xml$
