@@ -3,3 +3,5 @@ deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
     - /bin/cp -R frontend/out/. $DEPLOYPATH
+    - /bin/cp maintenance/index.html $DEPLOYPATH/index.html
+    - /bin/cp maintenance/.htaccess $DEPLOYPATH/.htaccess
