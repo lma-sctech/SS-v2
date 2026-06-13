@@ -2,8 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
-    - /bin/cp -R frontend/out/. $DEPLOYPATH
-    - /bin/cp maintenance/sanaa-logo-640.png $DEPLOYPATH/sanaa-logo-640.png
-    - /bin/cp maintenance/maintenance-hero.jpg $DEPLOYPATH/maintenance-hero.jpg
-    - /bin/cp maintenance/index.html $DEPLOYPATH/index.html
-    - /bin/cp maintenance/.htaccess $DEPLOYPATH/.htaccess
+    - /bin/cp maintenance/index.html $DEPLOYPATH
+    - /bin/cp maintenance/.htaccess $DEPLOYPATH
+    - /bin/cp maintenance/sanaa-logo-640.png $DEPLOYPATH
+    - /bin/cp maintenance/maintenance-hero.jpg $DEPLOYPATH
