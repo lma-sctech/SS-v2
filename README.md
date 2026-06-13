@@ -159,27 +159,6 @@ Recommended flow:
 4. Click Update from Remote.
 5. Click Deploy HEAD Commit.
 
-### Direct Heberjahiz Maintenance Deployment
-
-If cPanel Git Deployment is unavailable, GitHub Actions can upload the four maintenance files directly over FTPS without deleting the existing website.
-
-Create these GitHub Actions repository secrets:
-
-```txt
-FTP_SERVER
-FTP_USERNAME
-FTP_PASSWORD
-FTP_SERVER_DIR
-```
-
-`FTP_SERVER_DIR` must end with `/`. Use `/public_html/` for an FTP account rooted at the cPanel home directory, or `/` for an FTP account already restricted to `public_html`.
-
-Then run:
-
-```txt
-GitHub > Actions > Deploy maintenance page to Heberjahiz > Run workflow
-```
-
 ## Heberjahiz cPanel Backend Deployment
 
 Heberjahiz currently exposes `Setup Python App` on this hosting plan, so production uses the Python backend maintained in `backend-python/`.
